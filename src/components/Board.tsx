@@ -17,7 +17,7 @@ const Board = () => {
                   className={
                     col.color === null || col.num === 0
                       ? `${styles.cell} bg-black border-4 border-black`
-                      : `${styles.cell} bg-${col.color}-600 text-${col.textSize} border-t-${col.color}-300 border-l-${col.color}-300 border-${col.color}-800 border-4 flex justify-center items-center text-white`
+                      : `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`
                   }
                 >
                   {col.num}
