@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.4.7",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -18,11 +19,15 @@
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.1.1",
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.14",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
-    "prettier": "2.8.8"
+    "postcss": "^8.4.24",
+    "prettier": "2.8.8",
+    "tailwindcss": "^3.3.2"
   }
 }
