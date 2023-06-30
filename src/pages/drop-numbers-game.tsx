@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
+import Board from '@/components/Board';
 
 const DropNumbersGame = () => {
   return (
@@ -13,7 +14,11 @@ const DropNumbersGame = () => {
         />
       </Head>
       <div className={styles.curtain_open}>
-        <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen'></div>
+        <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen flex justify-center items-end'>
+          <div>
+            <Board />
+          </div>
+        </div>
       </div>
     </>
   );
