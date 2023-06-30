@@ -1,0 +1,107 @@
+/* Button */
+@mixin buttons {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: {
+    top: 0.6rem;
+    bottom: 0.6rem;
+  }
+  @media screen and (min-width: 640px) {
+    font-size: 1rem;
+    padding: {
+      top: 0.4rem;
+      bottom: 0.4rem;
+    }
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &:active {
+    filter: brightness(1.5);
+  }
+
+  &:disabled {
+    filter: brightness(0.5);
+    cursor: not-allowed;
+  }
+}
+
+@mixin green_btn {
+  @include buttons();
+  background: linear-gradient(#005b11, #08a800);
+  border: 2px solid #3a7d4685;
+  box-shadow: 5px 5px 10px #deffe6 inset, -5px -5px 10px #56d266 inset;
+}
+
+@mixin red_btn {
+  @include buttons();
+  background: linear-gradient(#840000, #ff0000);
+  border: 2px solid #a5000085;
+  box-shadow: 5px 5px 10px #ffdede inset, -5px -5px 10px #ff8787 inset;
+}
+
+@mixin blue_btn {
+  @include buttons();
+  background: linear-gradient(#000484, #0026ff);
+  border: 2px solid #2622ff85;
+  box-shadow: 5px 5px 10px #e0deff inset, -5px -5px 10px #4842fb inset;
+}
+
+@mixin orenge_btn {
+  @include buttons();
+  background: linear-gradient(#845400, #ffa600);
+  border: 2px solid #ffb22285;
+  box-shadow: 5px 5px 10px #fff4de inset, -5px -5px 10px #fbab42 inset;
+}
+
+.start_btn {
+  @include blue_btn();
+  width: 100%;
+}
+
+/* SVG */
+.shadow_container {
+  display: flex-row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.1rem;
+  filter: drop-shadow(5px 5px 5px #505050);
+}
+
+/* 画面遷移のアニメーション */
+.curtain_open {
+  &::before,
+  &::after {
+    content: '';
+    position: fixed; /* 固定表示 */
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background: linear-gradient(#000000, #606060);
+    animation: curtainOpen 1s forwards;
+    animation-delay: 1s;
+    z-index: 999;
+  }
+  &::before {
+    left: 0;
+  }
+  &::after {
+    right: 0;
+  }
+}
+
+@keyframes curtainOpen {
+  0% {
+    width: 50vw; /* 閉じている状態 */
+  }
+  100% {
+    width: 0; /* 開く */
+    visibility: hidden;
+  }
+}
