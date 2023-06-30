@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.nuxt/
+build/
+dist/
+out/
+public/
+package-lock.json
+vite.config.ts
+next.config.js
+tsconfig.json
