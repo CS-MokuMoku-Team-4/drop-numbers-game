@@ -12,10 +12,15 @@ const Board = () => {
           <div key={index} className='flex justify-center items-center'>
             {row.map((col, index) => {
               return (
-                <div key={index}
-                  className={`${styles.cell} bg-black text-white flex justify-center items-center`}
+                <div
+                  key={index}
+                  className={
+                    col.color === null || col.num === 0
+                      ? `${styles.cell} bg-black border-4 border-black`
+                      : `${styles.cell} bg-${col.color}-600 text-${col.textSize} border-t-${col.color}-300 border-l-${col.color}-300 border-${col.color}-800 border-4 flex justify-center items-center text-white`
+                  }
                 >
-                  {col}
+                  {col.num}
                 </div>
               );
             })}

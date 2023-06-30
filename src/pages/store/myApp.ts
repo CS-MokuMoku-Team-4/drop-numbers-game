@@ -1,15 +1,9 @@
+import { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialMyAppState = {
-  board: [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-  ],
+  board: [],
+  currentBlock: { num: 0, color: 'black', textSize: '4xl', rowIndex: -1, colIndex: -1 },
 };
 
 const myAppSlice = createSlice({
@@ -17,12 +11,15 @@ const myAppSlice = createSlice({
   initialState: initialMyAppState,
   reducers: {
     setBoard: (
-      state: { board: number[][] },
+      state: { board: Block[][] },
       action: {
-        payload: number[][];
+        payload: Block[][];
       },
     ) => {
       state.board = action.payload;
+    },
+    setCurrentBlock: (state: { currentBlock: Block }, action: { payload: Block }) => {
+      state.currentBlock = action.payload;
     },
   },
 });
