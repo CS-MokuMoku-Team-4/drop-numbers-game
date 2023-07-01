@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import styles from '@/styles/Home.module.scss';
 import { useRouter } from 'next/router';
-import StartButton from '@/components/ui/buttons/StartButton';
 import TitleSVG from '@/components/svgFiles/TitleSVG';
+import StartButton from '@/components/ui/buttons/StartButton';
+import styles from '@/styles/Home.module.scss';
 
 const Home = () => {
   const router = useRouter();

@@ -21,8 +21,8 @@ const notoSansJP = Noto_Sans_JP({
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <main className={`${montserrat.variable} ${notoSansJP.variable} font-sans`}>
-      <Provider store={store} >
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
       </Provider>
     </main>
   );

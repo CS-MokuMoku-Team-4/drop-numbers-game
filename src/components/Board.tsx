@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
+import type { MyAppState } from '@/types';
 import styles from '../styles/Home.module.scss';
-import { MyAppState } from '@/types';
+import { useSelector } from 'react-redux';
 
 const Board = () => {
   const board = useSelector((state: MyAppState) => state.myApp.board);

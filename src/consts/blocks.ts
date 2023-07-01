@@ -1,4 +1,4 @@
-import { Block } from '@/types';
+import type { Block } from '@/types';
 
 // const block0: Block = {
 //   num: 0,
@@ -8,8 +8,6 @@ import { Block } from '@/types';
 //   borderColor: 'border-black',
 //   textSize: 'text-4xl',
 //   textSizeNext: 'text-3xl',
-//   rowIndex: -1,
-//   colIndex: -1,
 // } as const;
 
 const block2: Block = {
@@ -20,8 +18,8 @@ const block2: Block = {
   borderColor: 'border-red-800',
   textSize: 'text-4xl',
   textSizeNext: 'text-3xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block4: Block = {
@@ -32,8 +30,8 @@ const block4: Block = {
   borderColor: 'border-orange-800',
   textSize: 'text-4xl',
   textSizeNext: 'text-3xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block8: Block = {
@@ -44,8 +42,8 @@ const block8: Block = {
   borderColor: 'border-amber-800',
   textSize: 'text-4xl',
   textSizeNext: 'text-3xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block16: Block = {
@@ -56,8 +54,8 @@ const block16: Block = {
   borderColor: 'border-yellow-800',
   textSize: 'text-3xl',
   textSizeNext: 'text-2xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block32: Block = {
@@ -68,8 +66,8 @@ const block32: Block = {
   borderColor: 'border-lime-800',
   textSize: 'text-3xl',
   textSizeNext: 'text-2xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block64: Block = {
@@ -80,8 +78,8 @@ const block64: Block = {
   borderColor: 'border-green-800',
   textSize: 'text-3xl',
   textSizeNext: 'text-2xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block128: Block = {
@@ -92,8 +90,8 @@ const block128: Block = {
   borderColor: 'border-emerald-800',
   textSize: 'text-2xl',
   textSizeNext: 'text-xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block256: Block = {
@@ -104,8 +102,8 @@ const block256: Block = {
   borderColor: 'border-teal-800',
   textSize: 'text-2xl',
   textSizeNext: 'text-xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block512: Block = {
@@ -116,8 +114,8 @@ const block512: Block = {
   borderColor: 'border-cyan-800',
   textSize: 'text-2xl',
   textSizeNext: 'text-xl',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block1024: Block = {
@@ -128,8 +126,8 @@ const block1024: Block = {
   borderColor: 'border-sky-800',
   textSize: 'text-xl',
   textSizeNext: 'text-lg',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block2048: Block = {
@@ -140,8 +138,8 @@ const block2048: Block = {
   borderColor: 'border-blue-800',
   textSize: 'text-xl',
   textSizeNext: 'text-lg',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block4096: Block = {
@@ -152,8 +150,8 @@ const block4096: Block = {
   borderColor: 'border-indigo-800',
   textSize: 'text-xl',
   textSizeNext: 'text-lg',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 const block8192: Block = {
@@ -164,8 +162,8 @@ const block8192: Block = {
   borderColor: 'border-violet-800',
   textSize: 'text-xl',
   textSizeNext: 'text-lg',
-  rowIndex: -1,
-  colIndex: -1,
+  rowIndex: 0,
+  colIndex: 0,
 } as const;
 
 export const blockList1: Block[] = [block2, block4, block8, block16, block32, block64];

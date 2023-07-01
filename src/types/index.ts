@@ -3,6 +3,9 @@ export type MyAppState = {
     board: Block[][];
     currentBlock: Block;
     nextBlock: Block;
+    currentColumn: number;
+    currentRow: number;
+    isBeginning: boolean;
   };
 };
 
