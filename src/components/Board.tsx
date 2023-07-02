@@ -20,17 +20,18 @@ const Board = () => {
         while (tempCol + 1 <= colIndex) {
           if (board[currentRow][tempCol + 1].num === 0) {
             tempCol++;
-          }
+          } else break;
         }
-        dispatch(myAppActions.setCurrentColumn(colIndex));
       } else if (colIndex < currentColumn) {
         while (tempCol - 1 >= colIndex) {
           if (board[currentRow][tempCol - 1].num === 0) {
             tempCol--;
-          }
+          } else break;
         }
-        dispatch(myAppActions.setCurrentColumn(colIndex));
       }
+
+      dispatch(myAppActions.setCurrentColumn(colIndex));
+      dispatch(myAppActions.setIsMoving(false));
     }
 
     return;
