@@ -1,5 +1,5 @@
 import { blockList1 } from '@/consts/blocks';
-import { initialBoard } from '@/model/initialBoard';
+import { initialBoard } from '@/consts/initialBoard';
 import type { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 

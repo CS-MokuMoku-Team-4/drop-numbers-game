@@ -1,6 +1,6 @@
 import type { Block } from '@/types';
 
-let block0: Block = {
+const block0: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -12,7 +12,7 @@ let block0: Block = {
   colIndex: 0,
 };
 
-let block1: Block = {
+const block1: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -24,7 +24,7 @@ let block1: Block = {
   colIndex: 1,
 };
 
-let block2: Block = {
+const block2: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -36,7 +36,7 @@ let block2: Block = {
   colIndex: 2,
 };
 
-let block3: Block = {
+const block3: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -48,7 +48,7 @@ let block3: Block = {
   colIndex: 3,
 };
 
-let block4: Block = {
+const block4: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -60,7 +60,7 @@ let block4: Block = {
   colIndex: 4,
 };
 
-let block5: Block = {
+const block5: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -72,7 +72,7 @@ let block5: Block = {
   colIndex: 0,
 };
 
-let block6: Block = {
+const block6: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -84,7 +84,7 @@ let block6: Block = {
   colIndex: 1,
 };
 
-let block7: Block = {
+const block7: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -96,7 +96,7 @@ let block7: Block = {
   colIndex: 2,
 };
 
-let block8: Block = {
+const block8: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -108,7 +108,7 @@ let block8: Block = {
   colIndex: 3,
 };
 
-let block9: Block = {
+const block9: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -120,7 +120,7 @@ let block9: Block = {
   colIndex: 4,
 };
 
-let block10: Block = {
+const block10: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -132,7 +132,7 @@ let block10: Block = {
   colIndex: 0,
 };
 
-let block11: Block = {
+const block11: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -144,7 +144,7 @@ let block11: Block = {
   colIndex: 1,
 };
 
-let block12: Block = {
+const block12: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -156,7 +156,7 @@ let block12: Block = {
   colIndex: 2,
 };
 
-let block13: Block = {
+const block13: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -168,7 +168,7 @@ let block13: Block = {
   colIndex: 3,
 };
 
-let block14: Block = {
+const block14: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -180,7 +180,7 @@ let block14: Block = {
   colIndex: 4,
 };
 
-let block15: Block = {
+const block15: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -192,7 +192,7 @@ let block15: Block = {
   colIndex: 0,
 };
 
-let block16: Block = {
+const block16: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -204,7 +204,7 @@ let block16: Block = {
   colIndex: 1,
 };
 
-let block17: Block = {
+const block17: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -216,7 +216,7 @@ let block17: Block = {
   colIndex: 2,
 };
 
-let block18: Block = {
+const block18: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -228,7 +228,7 @@ let block18: Block = {
   colIndex: 3,
 };
 
-let block19: Block = {
+const block19: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -240,7 +240,7 @@ let block19: Block = {
   colIndex: 4,
 };
 
-let block20: Block = {
+const block20: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -252,7 +252,7 @@ let block20: Block = {
   colIndex: 0,
 };
 
-let block21: Block = {
+const block21: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -264,7 +264,7 @@ let block21: Block = {
   colIndex: 1,
 };
 
-let block22: Block = {
+const block22: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -276,7 +276,7 @@ let block22: Block = {
   colIndex: 2,
 };
 
-let block23: Block = {
+const block23: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -288,7 +288,7 @@ let block23: Block = {
   colIndex: 3,
 };
 
-let block24: Block = {
+const block24: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -300,7 +300,7 @@ let block24: Block = {
   colIndex: 4,
 };
 
-let block25: Block = {
+const block25: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -312,7 +312,7 @@ let block25: Block = {
   colIndex: 0,
 };
 
-let block26: Block = {
+const block26: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -324,7 +324,7 @@ let block26: Block = {
   colIndex: 1,
 };
 
-let block27: Block = {
+const block27: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -336,7 +336,7 @@ let block27: Block = {
   colIndex: 2,
 };
 
-let block28: Block = {
+const block28: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -348,7 +348,7 @@ let block28: Block = {
   colIndex: 3,
 };
 
-let block29: Block = {
+const block29: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -360,7 +360,7 @@ let block29: Block = {
   colIndex: 4,
 };
 
-let block30: Block = {
+const block30: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -372,7 +372,7 @@ let block30: Block = {
   colIndex: 0,
 };
 
-let block31: Block = {
+const block31: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -384,7 +384,7 @@ let block31: Block = {
   colIndex: 1,
 };
 
-let block32: Block = {
+const block32: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -396,7 +396,7 @@ let block32: Block = {
   colIndex: 2,
 };
 
-let block33: Block = {
+const block33: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -408,7 +408,7 @@ let block33: Block = {
   colIndex: 3,
 };
 
-let block34: Block = {
+const block34: Block = {
   num: 0,
   color: 'bg-black',
   topColor: 'border-t-black',
@@ -420,7 +420,7 @@ let block34: Block = {
   colIndex: 4,
 };
 
-export let initialBoard: Block[][] = [
+export const initialBoard: Block[][] = [
   [block0, block1, block2, block3, block4],
   [block5, block6, block7, block8, block9],
   [block10, block11, block12, block13, block14],

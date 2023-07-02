@@ -51,55 +51,54 @@ const DropNumbersGame = () => {
     return index;
   };
 
-  const updateBoad = (rowIndex: number, nextIndex: number) => {
-    const cloneBoard = structuredClone(board);
+  const animateBlock = (rowIndex: number, nextIndex: number, currentBoard: Block[][]) => {
+    const cloneBoard = structuredClone(currentBoard);
 
-    if (rowIndex - 1 >= 0) {
-      const emptyBlock: Block = {
-        num: 0,
-        color: 'bg-black',
-        topColor: 'border-t-black',
-        leftColor: 'border-l-black',
-        borderColor: 'border-black',
-        textSize: 'text-4xl',
-        textSizeNext: 'text-3xl',
-        rowIndex: rowIndex,
-        colIndex: currentColumn,
-      };
+    // if (rowIndex - 1 >= 0) {
+    //   const emptyBlock: Block = {
+    //     num: 0,
+    //     color: 'bg-black',
+    //     topColor: 'border-t-black',
+    //     leftColor: 'border-l-black',
+    //     borderColor: 'border-black',
+    //     textSize: 'text-4xl',
+    //     textSizeNext: 'text-3xl',
+    //     rowIndex: rowIndex,
+    //     colIndex: currentColumn,
+    //   };
 
-      cloneBoard[rowIndex - 1][currentColumn] = emptyBlock;
-    }
+    //   cloneBoard[rowIndex - 1][currentColumn] = emptyBlock;
+    // }
 
     cloneBoard[rowIndex][currentColumn] = blockList1[nextIndex];
-    console.log(cloneBoard);
     dispatch(myAppActions.setBoard(cloneBoard));
-    console.log(board);
   };
 
-  useEffect(() => {
-    console.log(nextBlockIndex);
-    console.log(currentBlock);
-  }, [nextBlockIndex, currentBlock]);
-
-  const dropNextBlock = (rowIndex: number, blockIndex: number) => {
+  const dropNextBlock = (rowIndex: number, blockIndex: number, newBoard: Block[][]) => {
     dispatch(myAppActions.setCurrentBlock(blockList1[blockIndex]));
-    dropBlock(rowIndex, blockIndex, prepareNextBlock());
+    dropBlock(rowIndex, blockIndex, prepareNextBlock(), newBoard);
   };
 
-  const dropBlock = (rowIndex: number, currentIndex: number, nextIndex: number) => {
-    if (!isGameOver()) {
+  const dropBlock = (
+    rowIndex: number,
+    currentIndex: number,
+    nextIndex: number,
+    currentBoard: Block[][],
+  ) => {
+    if (!isGameOver(currentBoard)) {
       setTimeout(() => {
-        updateBoad(rowIndex, currentIndex);
-        if (isBottom(rowIndex)) {
+        animateBlock(rowIndex, currentIndex, currentBoard);
+        if (isBottom(rowIndex, currentBoard)) {
           // 一番下に到達したかどうか
+          let newBoard = updateBoard(currentIndex, rowIndex, currentColumn, currentBoard);
           rowIndex = 0;
           dispatch(myAppActions.setCurrentRow(rowIndex));
-          dropNextBlock(rowIndex, nextIndex); // 次のブロック
+          dropNextBlock(rowIndex, nextIndex, newBoard); // 次のブロック
         } else {
           rowIndex++;
           dispatch(myAppActions.setCurrentRow(rowIndex));
           console.log(rowIndex, currentRow);
-          dropBlock(rowIndex, currentIndex, nextIndex);
+          dropBlock(rowIndex, currentIndex, nextIndex, currentBoard);
         }
       }, 1000);
     } else {
@@ -108,20 +107,36 @@ const DropNumbersGame = () => {
     }
   };
 
-  const isBottom = (rowIndex: number) => {
+  const isBottom = (rowIndex: number, currentBoard: Block[][]) => {
     console.log(rowIndex);
 
-    return rowIndex >= board.length - 1 || board[rowIndex + 1][currentColumn].num !== 0;
+    return rowIndex >= board.length - 1 || currentBoard[rowIndex + 1][currentColumn].num !== 0;
   };
 
-  const isGameOver = () => {
-    return board[0][2].num !== 0;
+  const isGameOver = (currentBoard: Block[][]) => {
+    return currentBoard[0][2].num !== 0;
+  };
+
+  const updateBoard = (
+    blockIndex: number,
+    row: number,
+    column: number,
+    currentBoard: Block[][],
+  ): Block[][] => {
+    const cloneBoard = structuredClone(currentBoard);
+
+    cloneBoard[row][column] = blockList1[blockIndex];
+    dispatch(myAppActions.setBoard(cloneBoard));
+    console.log(cloneBoard);
+    console.log(board);
+
+    return cloneBoard;
   };
 
   const gameStart = () => {
     console.log('Start!!');
     dispatch(myAppActions.setIsBeginning(false));
-    dropNextBlock(0, prepareNextBlock());
+    dropNextBlock(0, prepareNextBlock(), board);
   };
 
   useEffect(() => {
