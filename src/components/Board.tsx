@@ -8,25 +8,32 @@ const Board = () => {
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const currentRow = useSelector((state: MyAppState) => state.myApp.currentRow);
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
+  const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
 
   const handleClick = (colIndex: number) => {
-    let tempCol = currentColumn;
+    if (!isMoving) {
+      let tempCol = currentColumn;
 
-    if (colIndex > currentColumn) {
-      while (tempCol + 1 <= colIndex) {
-        if (board[currentRow][tempCol + 1].num === 0) {
-          tempCol++;
+      dispatch(myAppActions.setIsMoving(true));
+
+      if (colIndex > currentColumn) {
+        while (tempCol + 1 <= colIndex) {
+          if (board[currentRow][tempCol + 1].num === 0) {
+            tempCol++;
+          }
         }
-      }
-      dispatch(myAppActions.setCurrentColumn(colIndex));
-    } else if (colIndex < currentColumn) {
-      while (tempCol - 1 >= colIndex) {
-        if (board[currentRow][tempCol - 1].num === 0) {
-          tempCol--;
+        dispatch(myAppActions.setCurrentColumn(colIndex));
+      } else if (colIndex < currentColumn) {
+        while (tempCol - 1 >= colIndex) {
+          if (board[currentRow][tempCol - 1].num === 0) {
+            tempCol--;
+          }
         }
+        dispatch(myAppActions.setCurrentColumn(colIndex));
       }
-      dispatch(myAppActions.setCurrentColumn(colIndex));
     }
+
+    return;
   };
 
   return (

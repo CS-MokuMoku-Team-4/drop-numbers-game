@@ -1,6 +1,6 @@
 import type { Block, MyAppState } from '@/types';
 import Head from 'next/head';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { blockList1 } from '@/consts/blocks';
 import Board from '@/components/Board';
@@ -9,12 +9,17 @@ import { myAppActions } from './store/myApp';
 import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
+  const FALL = 5;
+  const NORMAL = 1000;
   const dispatch = useDispatch();
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
-  const currentRow = useSelector((state: MyAppState) => state.myApp.currentRow);
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const isBeginning = useSelector((state: MyAppState) => state.myApp.isBeginning);
+  const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const colIndex = useRef(currentColumn);
+  const speed = useRef(NORMAL);
+  // const nextBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
+  // const currentBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
 
   // const initializeBoard = () => {
   // const initialBoard: Block[][] = [];
@@ -44,44 +49,55 @@ const DropNumbersGame = () => {
 
   const prepareNextBlock = (): number => {
     const index = Math.floor(Math.random() * 7) % blockList1.length;
+
     dispatch(myAppActions.setNextBlock(blockList1[index]));
-    dispatch(myAppActions.setNextBlockIndex(index));
     return index;
   };
 
-  const animateBlock = (rowIndex: number, nextIndex: number, currentBoard: Block[][]) => {
-    const cloneBoard = structuredClone(currentBoard);
+  const updateBoard = (
+    rowIndex: number,
+    currentBoard: Block[][],
+    currentBlockIndex: number,
+  ): Block[][] => {
+    let cloneBoard = structuredClone(currentBoard);
 
-    cloneBoard[rowIndex][colIndex.current] = blockList1[nextIndex];
+    cloneBoard[rowIndex][colIndex.current] = blockList1[currentBlockIndex];
     dispatch(myAppActions.setBoard(cloneBoard));
+
+    return cloneBoard;
   };
 
-  const dropNextBlock = (rowIndex: number, blockIndex: number, newBoard: Block[][]) => {
-    dispatch(myAppActions.setCurrentBlock(blockList1[blockIndex]));
-    dropBlock(rowIndex, blockIndex, prepareNextBlock(), newBoard);
+  const dropNextBlock = (
+    rowIndex: number,
+    currentBoard: Block[][],
+    nextBlockIndex: number,
+  ) => {
+    dispatch(myAppActions.setIsMoving(false));
+    speed.current = NORMAL;
+    // currentBlockIndexRef.current = nextBlockIndexRef.current;
+    dropBlock(rowIndex, currentBoard, nextBlockIndex, prepareNextBlock());
   };
 
   const dropBlock = (
     rowIndex: number,
-    currentIndex: number,
-    nextIndex: number,
     currentBoard: Block[][],
+    currentBlockIndex: number,
+    nextBlockIndex: number,
   ) => {
     if (!isGameOver(currentBoard)) {
       setTimeout(() => {
-        animateBlock(rowIndex, currentIndex, currentBoard);
+        updateBoard(rowIndex, currentBoard, currentBlockIndex);
+
         if (isBottom(rowIndex, currentBoard)) {
-          // 一番下に到達したかどうか
-          let newBoard = updateBoard(currentIndex, rowIndex, currentBoard);
-          rowIndex = 0;
-          dispatch(myAppActions.setCurrentRow(rowIndex));
-          dropNextBlock(rowIndex, nextIndex, newBoard); // 次のブロック
+          // 一番下に到達した場合
+          let newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
+          dispatch(myAppActions.setCurrentRow(0));
+          dropNextBlock(0, newBoard, nextBlockIndex); // 次のブロック
         } else {
-          rowIndex++;
-          dispatch(myAppActions.setCurrentRow(rowIndex));
-          dropBlock(rowIndex, currentIndex, nextIndex, currentBoard);
+          dispatch(myAppActions.setCurrentRow(rowIndex + 1));
+          dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
         }
-      }, 1000);
+      }, speed.current);
     } else {
       console.log('Game Over!!');
     }
@@ -92,22 +108,18 @@ const DropNumbersGame = () => {
   };
 
   const isGameOver = (currentBoard: Block[][]) => {
+    console.log(currentBoard);
+
     return currentBoard[0][colIndex.current].num !== 0;
-  };
-
-  const updateBoard = (blockIndex: number, row: number, currentBoard: Block[][]): Block[][] => {
-    const cloneBoard = structuredClone(currentBoard);
-
-    cloneBoard[row][colIndex.current] = blockList1[blockIndex];
-    dispatch(myAppActions.setBoard(cloneBoard));
-
-    return cloneBoard;
   };
 
   const gameStart = useCallback(() => {
     console.log('Start!!');
     dispatch(myAppActions.setIsBeginning(false));
-    dropNextBlock(0, prepareNextBlock(), board);
+
+    const currentBlockIndex = Math.floor(Math.random() * 7) % blockList1.length;
+
+    dropNextBlock(0, board, currentBlockIndex);
   }, []);
 
   useEffect(() => {
@@ -115,11 +127,14 @@ const DropNumbersGame = () => {
       gameStart();
     }
 
-    if (!isBottom(currentRow, board)) {
+    if (!isMoving) {
       colIndex.current = currentColumn;
+      speed.current = NORMAL;
+    } else {
+      speed.current = FALL;
     }
-    console.log(currentColumn);
-  }, [isBeginning, gameStart, currentColumn, colIndex, isBottom]);
+    console.log(isMoving);
+  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving, speed]);
 
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {
   //   switch (event.keyCode) {
