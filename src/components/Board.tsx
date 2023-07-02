@@ -7,13 +7,13 @@ const Board = () => {
 
   return (
     <div className={`${styles.metallic} mb-10 p-5`}>
-      {board.map((row, index) => {
+      {board.map((row, rowIndex) => {
         return (
-          <div key={index} className='flex justify-center items-center'>
-            {row.map((col, index) => {
+          <div key={rowIndex} className='flex justify-center items-center'>
+            {row.map((col, colIndex) => {
               return (
                 <div
-                  key={index}
+                  key={colIndex}
                   className={
                     col.num === 0
                       ? `${styles.cell} bg-black border-4 border-black`
