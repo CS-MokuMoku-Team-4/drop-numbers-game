@@ -6,6 +6,7 @@ export type MyAppState = {
     currentColumn: number;
     currentRow: number;
     isBeginning: boolean;
+    nextBlockIndex: number;
   };
 };
 

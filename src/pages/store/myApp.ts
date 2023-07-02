@@ -1,4 +1,5 @@
-import { initialBoard } from '@/model/board';
+import { blockList1 } from '@/consts/blocks';
+import { initialBoard } from '@/model/initialBoard';
 import type { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -29,6 +30,7 @@ const initialMyAppState = {
   currentColumn: 2,
   currentRow: -1,
   isBeginning: true,
+  nextBlockIndex: Math.floor(Math.random() * 7) % blockList1.length,
 };
 
 const myAppSlice = createSlice({
@@ -60,6 +62,9 @@ const myAppSlice = createSlice({
     },
     setIsBeginning: (state: { isBeginning: boolean }, action: { payload: boolean }) => {
       state.isBeginning = action.payload;
+    },
+    setNextBlockIndex: (state: { nextBlockIndex: number }, action: { payload: number }) => {
+      state.nextBlockIndex = action.payload;
     },
   },
 });
