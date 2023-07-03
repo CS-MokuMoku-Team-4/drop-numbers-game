@@ -51,11 +51,26 @@ const DropNumbersGame = () => {
 
   const prepareNextBlock = useCallback((): number => {
     const index = Math.floor(Math.random() * 7) % blockList1.length;
-    const cloneNextBlockArea = structuredClone(nextBlockArea);
+    const cloneNextBlockArea1 = structuredClone(nextBlockArea);
+    const cloneNextBlockArea2 = structuredClone(nextBlockArea);
+    const emptyBlock: Block = {
+      num: 0,
+      color: 'bg-black',
+      topColor: 'border-t-black',
+      leftColor: 'border-l-black',
+      borderColor: 'border-black',
+      textSize: 'text-4xl',
+      textSizeSmall: 'text-3xl',
+    };
 
-    dispatch(myAppActions.setNextBlock(blockList1[index]));
-    cloneNextBlockArea[colIndex.current] = blockList1[index];
-    dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea));
+    cloneNextBlockArea1[colIndex.current] = emptyBlock;
+    dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea1));
+
+    setTimeout(() => {
+      dispatch(myAppActions.setNextBlock(blockList1[index]));
+      cloneNextBlockArea2[colIndex.current] = blockList1[index];
+      dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea2));
+    }, 500);
 
     return index;
   }, [dispatch, nextBlockArea]);
