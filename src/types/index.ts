@@ -6,7 +6,6 @@ export type MyAppState = {
     nextBlock: Block;
     currentColumn: number;
     currentRow: number;
-    isBeginning: boolean;
     isMoving: boolean;
     isMoved: boolean;
   };

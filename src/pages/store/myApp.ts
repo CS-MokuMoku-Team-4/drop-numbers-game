@@ -25,7 +25,6 @@ const initialMyAppState = {
   },
   currentColumn: 2,
   currentRow: -1,
-  isBeginning: true,
   isMoving: false,
   isMoved: false,
 };
@@ -63,9 +62,6 @@ const myAppSlice = createSlice({
     },
     incrementCurrentRow: (state: { currentRow: number }) => {
       state.currentRow++;
-    },
-    setIsBeginning: (state: { isBeginning: boolean }, action: { payload: boolean }) => {
-      state.isBeginning = action.payload;
     },
     setIsMoving: (state: { isMoving: boolean }, action: { payload: boolean }) => {
       state.isMoving = action.payload;

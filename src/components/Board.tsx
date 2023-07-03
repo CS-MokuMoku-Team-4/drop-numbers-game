@@ -1,4 +1,5 @@
 import type { MyAppState } from '@/types';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { myAppActions } from '@/pages/store/myApp';
 import NextBlockArea from './NextBlockArea';
@@ -11,27 +12,40 @@ const Board = () => {
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
+  const currentColRef = useRef(currentColumn);
 
   const handleClick = (colIndex: number) => {
     if (!isMoving && !isMoved) {
-      let tempCol = currentColumn;
+      currentColRef.current = currentColumn;
+      let tempCol = currentColRef.current;
+      let resultCol = colIndex;
 
       dispatch(myAppActions.setIsMoving(true));
 
-      if (colIndex > currentColumn) {
+      if (colIndex > currentColRef.current) {
         while (tempCol + 1 <= colIndex) {
+          // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRow][tempCol + 1].num === 0) {
             tempCol++;
-          } else break;
+          } else {
+            // 障害物があれば移動しない
+            resultCol = currentColRef.current;
+            break;
+          }
         }
-      } else if (colIndex < currentColumn) {
+      } else if (colIndex < currentColRef.current) {
         while (tempCol - 1 >= colIndex) {
+          // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRow][tempCol - 1].num === 0) {
             tempCol--;
-          } else break;
+          } else {
+            // 障害物があれば移動しない
+            resultCol = currentColRef.current;
+            break;
+          }
         }
       }
-      dispatch(myAppActions.setCurrentColumn(colIndex));
+      dispatch(myAppActions.setCurrentColumn(resultCol));
       dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
     }

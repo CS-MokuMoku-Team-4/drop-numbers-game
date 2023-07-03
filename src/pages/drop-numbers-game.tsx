@@ -9,16 +9,16 @@ import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
   const HIGH_SPEED = 5;
-  const NORMAL_SPEED = 1000;
+  const NORMAL_SPEED = 500;
   const dispatch = useDispatch();
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const nextBlockArea = useSelector((state: MyAppState) => state.myApp.nextBlockArea);
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
-  const isBeginning = useSelector((state: MyAppState) => state.myApp.isBeginning);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
   const colIndex = useRef(currentColumn);
   const isMovedRef = useRef(isMoved);
+  const startRef = useRef(true);
 
   // const nextBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
   // const currentBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
@@ -66,11 +66,11 @@ const DropNumbersGame = () => {
     cloneNextBlockArea1[colIndex.current] = emptyBlock;
     dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea1));
 
-    setTimeout(() => {
+    // setTimeout(() => {
       dispatch(myAppActions.setNextBlock(blockList1[index]));
       cloneNextBlockArea2[colIndex.current] = blockList1[index];
       dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea2));
-    }, 500);
+    // }, 300);
 
     return index;
   }, [dispatch, nextBlockArea]);
@@ -102,25 +102,22 @@ const DropNumbersGame = () => {
       nextBlockIndex: number,
     ): void => {
       if (!isGameOver(currentBoard)) {
-        setTimeout(
-          () => {
-            updateBoard(rowIndex, currentBoard, currentBlockIndex);
+        const newBoard1 = updateBoard(rowIndex, currentBoard, currentBlockIndex);
 
-            if (isBottom(rowIndex, currentBoard)) {
-              // 一番下に到達した場合
-              const newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
-              dispatch(myAppActions.setCurrentRow(0));
-              dispatch(myAppActions.setIsMoving(false));
-              dispatch(myAppActions.setIsMoved(false));
-              isMovedRef.current = false;
-              dropBlock(0, newBoard, nextBlockIndex, prepareNextBlock()); // 次のブロック
-            } else {
-              dispatch(myAppActions.setCurrentRow(rowIndex + 1));
-              dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
-            }
-          },
-          isMovedRef.current ? HIGH_SPEED : NORMAL_SPEED,
-        );
+        if (isBottom(rowIndex, newBoard1)) {
+          // 一番下に到達した場合
+          const newBoard2 = updateBoard(rowIndex, newBoard1, currentBlockIndex);
+          dispatch(myAppActions.setCurrentRow(0));
+          dispatch(myAppActions.setIsMoving(false));
+          dispatch(myAppActions.setIsMoved(false));
+          isMovedRef.current = false;
+          dropBlock(0, newBoard2, nextBlockIndex, prepareNextBlock()); // 次のブロック
+        } else {
+          setTimeout(() => {
+            dispatch(myAppActions.setCurrentRow(rowIndex + 1));
+            dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
+          }, isMovedRef.current ? HIGH_SPEED : NORMAL_SPEED);
+        }
       } else {
         console.log('Game Over!!');
       }
@@ -144,15 +141,15 @@ const DropNumbersGame = () => {
 
   const gameStart = useCallback(() => {
     console.log('Start!!');
-    dispatch(myAppActions.setIsBeginning(false));
 
     const currentBlockIndex = Math.floor(Math.random() * 7) % blockList1.length;
 
     dropNextBlock(0, board, currentBlockIndex);
-  }, [board, dispatch, dropNextBlock]);
+  }, [board, dropNextBlock]);
 
   useEffect(() => {
-    if (isBeginning) {
+    if (startRef.current) {
+      startRef.current = false;
       gameStart();
     }
 
@@ -163,7 +160,7 @@ const DropNumbersGame = () => {
     if (isMoved) {
       isMovedRef.current = true;
     }
-  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving, isMoved]);
+  }, [gameStart, currentColumn, colIndex, isMoving, isMoved]);
 
   // キー入力
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {
