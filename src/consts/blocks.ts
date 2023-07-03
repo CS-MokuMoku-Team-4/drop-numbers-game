@@ -1,15 +1,5 @@
 import type { Block } from '@/types';
 
-// const block0: Block = {
-//   num: 0,
-//   color: 'bg-black',
-//   topColor: 'border-t-black',
-//   leftColor: 'border-l-black',
-//   borderColor: 'border-black',
-//   textSize: 'text-4xl',
-//   textSizeNext: 'text-3xl',
-// } as const;
-
 const block2: Block = {
   num: 2,
   color: 'bg-red-600',
@@ -17,9 +7,7 @@ const block2: Block = {
   leftColor: 'border-l-red-300',
   borderColor: 'border-red-800',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 } as const;
 
 const block4: Block = {
@@ -29,9 +17,7 @@ const block4: Block = {
   leftColor: 'border-l-orange-300',
   borderColor: 'border-orange-800',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 } as const;
 
 const block8: Block = {
@@ -41,9 +27,7 @@ const block8: Block = {
   leftColor: 'border-l-amber-300',
   borderColor: 'border-amber-800',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 } as const;
 
 const block16: Block = {
@@ -53,9 +37,7 @@ const block16: Block = {
   leftColor: 'border-l-yellow-300',
   borderColor: 'border-yellow-800',
   textSize: 'text-3xl',
-  textSizeNext: 'text-2xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-2xl',
 } as const;
 
 const block32: Block = {
@@ -65,9 +47,7 @@ const block32: Block = {
   leftColor: 'border-l-lime-300',
   borderColor: 'border-lime-800',
   textSize: 'text-3xl',
-  textSizeNext: 'text-2xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-2xl',
 } as const;
 
 const block64: Block = {
@@ -77,9 +57,7 @@ const block64: Block = {
   leftColor: 'border-l-green-300',
   borderColor: 'border-green-800',
   textSize: 'text-3xl',
-  textSizeNext: 'text-2xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-2xl',
 } as const;
 
 const block128: Block = {
@@ -89,9 +67,7 @@ const block128: Block = {
   leftColor: 'border-l-emerald-300',
   borderColor: 'border-emerald-800',
   textSize: 'text-2xl',
-  textSizeNext: 'text-xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-xl',
 } as const;
 
 const block256: Block = {
@@ -101,9 +77,7 @@ const block256: Block = {
   leftColor: 'border-l-teal-300',
   borderColor: 'border-teal-800',
   textSize: 'text-2xl',
-  textSizeNext: 'text-xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-xl',
 } as const;
 
 const block512: Block = {
@@ -113,9 +87,7 @@ const block512: Block = {
   leftColor: 'border-l-cyan-300',
   borderColor: 'border-cyan-800',
   textSize: 'text-2xl',
-  textSizeNext: 'text-xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-xl',
 } as const;
 
 const block1024: Block = {
@@ -125,9 +97,7 @@ const block1024: Block = {
   leftColor: 'border-l-sky-300',
   borderColor: 'border-sky-800',
   textSize: 'text-xl',
-  textSizeNext: 'text-lg',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-lg',
 } as const;
 
 const block2048: Block = {
@@ -137,9 +107,7 @@ const block2048: Block = {
   leftColor: 'border-l-blue-300',
   borderColor: 'border-blue-800',
   textSize: 'text-xl',
-  textSizeNext: 'text-lg',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-lg',
 } as const;
 
 const block4096: Block = {
@@ -149,9 +117,7 @@ const block4096: Block = {
   leftColor: 'border-l-indigo-300',
   borderColor: 'border-indigo-800',
   textSize: 'text-xl',
-  textSizeNext: 'text-lg',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-lg',
 } as const;
 
 const block8192: Block = {
@@ -161,9 +127,7 @@ const block8192: Block = {
   leftColor: 'border-l-violet-300',
   borderColor: 'border-violet-800',
   textSize: 'text-xl',
-  textSizeNext: 'text-lg',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-lg',
 } as const;
 
 export const blockList1: Block[] = [block2, block4, block8, block16, block32, block64];

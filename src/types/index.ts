@@ -1,6 +1,7 @@
 export type MyAppState = {
   myApp: {
     board: Block[][];
+    nextBlockArea: Block[];
     currentBlock: Block;
     nextBlock: Block;
     currentColumn: number;
@@ -18,7 +19,5 @@ export type Block = {
   leftColor: string;
   borderColor: string;
   textSize: string;
-  textSizeNext: string;
-  rowIndex: number;
-  colIndex: number;
+  textSizeSmall: string;
 };

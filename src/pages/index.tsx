@@ -8,7 +8,7 @@ const Home = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/drop-numbers-game');
+    void router.push('/drop-numbers-game');
   };
 
   return (

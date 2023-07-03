@@ -7,9 +7,7 @@ const block0: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block1: Block = {
@@ -19,9 +17,7 @@ const block1: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block2: Block = {
@@ -31,9 +27,7 @@ const block2: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block3: Block = {
@@ -43,9 +37,7 @@ const block3: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block4: Block = {
@@ -55,9 +47,7 @@ const block4: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 0,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block5: Block = {
@@ -67,9 +57,7 @@ const block5: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 1,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block6: Block = {
@@ -79,9 +67,7 @@ const block6: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 1,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block7: Block = {
@@ -91,9 +77,7 @@ const block7: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 1,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block8: Block = {
@@ -103,9 +87,7 @@ const block8: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 1,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block9: Block = {
@@ -115,9 +97,7 @@ const block9: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 1,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block10: Block = {
@@ -127,9 +107,7 @@ const block10: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 2,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block11: Block = {
@@ -139,9 +117,7 @@ const block11: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 2,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block12: Block = {
@@ -151,9 +127,7 @@ const block12: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 2,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block13: Block = {
@@ -163,9 +137,7 @@ const block13: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 2,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block14: Block = {
@@ -175,9 +147,7 @@ const block14: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 2,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block15: Block = {
@@ -187,9 +157,7 @@ const block15: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 3,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block16: Block = {
@@ -199,9 +167,7 @@ const block16: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 3,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block17: Block = {
@@ -211,9 +177,7 @@ const block17: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 3,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block18: Block = {
@@ -223,9 +187,7 @@ const block18: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 3,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block19: Block = {
@@ -235,9 +197,7 @@ const block19: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 3,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block20: Block = {
@@ -247,9 +207,7 @@ const block20: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 4,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block21: Block = {
@@ -259,9 +217,7 @@ const block21: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 4,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block22: Block = {
@@ -271,9 +227,7 @@ const block22: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 4,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block23: Block = {
@@ -283,9 +237,7 @@ const block23: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 4,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block24: Block = {
@@ -295,9 +247,7 @@ const block24: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 4,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block25: Block = {
@@ -307,9 +257,7 @@ const block25: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 5,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block26: Block = {
@@ -319,9 +267,7 @@ const block26: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 5,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block27: Block = {
@@ -331,9 +277,7 @@ const block27: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 5,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block28: Block = {
@@ -343,9 +287,7 @@ const block28: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 5,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block29: Block = {
@@ -355,9 +297,7 @@ const block29: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 5,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 const block30: Block = {
@@ -367,9 +307,7 @@ const block30: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 6,
-  colIndex: 0,
+  textSizeSmall: 'text-3xl',
 };
 
 const block31: Block = {
@@ -379,9 +317,7 @@ const block31: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 6,
-  colIndex: 1,
+  textSizeSmall: 'text-3xl',
 };
 
 const block32: Block = {
@@ -391,9 +327,7 @@ const block32: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 6,
-  colIndex: 2,
+  textSizeSmall: 'text-3xl',
 };
 
 const block33: Block = {
@@ -403,9 +337,7 @@ const block33: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 6,
-  colIndex: 3,
+  textSizeSmall: 'text-3xl',
 };
 
 const block34: Block = {
@@ -415,9 +347,7 @@ const block34: Block = {
   leftColor: 'border-l-black',
   borderColor: 'border-black',
   textSize: 'text-4xl',
-  textSizeNext: 'text-3xl',
-  rowIndex: 6,
-  colIndex: 4,
+  textSizeSmall: 'text-3xl',
 };
 
 export const initialBoard: Block[][] = [
@@ -429,3 +359,5 @@ export const initialBoard: Block[][] = [
   [block25, block26, block27, block28, block29],
   [block30, block31, block32, block33, block34],
 ];
+
+export const initialNextBlocks: Block[] = [block0, block1, block2, block3, block4];

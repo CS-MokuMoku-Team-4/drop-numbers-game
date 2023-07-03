@@ -1,9 +1,10 @@
 import type { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { initialBoard } from '@/consts/initialBoard';
+import { initialBoard, initialNextBlocks } from '@/consts/initialBoard';
 
 const initialMyAppState = {
   board: initialBoard,
+  nextBlockArea: initialNextBlocks,
   currentBlock: {
     num: 2,
     color: 'bg-red-600',
@@ -11,9 +12,7 @@ const initialMyAppState = {
     leftColor: 'border-l-red-300',
     borderColor: 'border-red-800',
     textSize: 'text-4xl',
-    textSizeNext: 'text-3xl',
-    rowIndex: -1,
-    colIndex: 2,
+    textSizeSmall: 'text-3xl',
   },
   nextBlock: {
     num: 4,
@@ -22,9 +21,7 @@ const initialMyAppState = {
     leftColor: 'border-l-orange-300',
     borderColor: 'border-orange-800',
     textSize: 'text-4xl',
-    textSizeNext: 'text-3xl',
-    rowIndex: -1,
-    colIndex: 2,
+    textSizeSmall: 'text-3xl',
   },
   currentColumn: 2,
   currentRow: -1,
@@ -44,6 +41,13 @@ const myAppSlice = createSlice({
       },
     ) => {
       state.board = action.payload;
+    },
+    setNextBlockArea: ( state: { nextBlockArea: Block[] },
+      action: {
+        payload: Block[];
+      },
+    ) => {
+      state.nextBlockArea = action.payload;
     },
     setCurrentBlock: (state: { currentBlock: Block }, action: { payload: Block }) => {
       state.currentBlock = action.payload;

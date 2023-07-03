@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { blockList1 } from '@/consts/blocks';
 import Board from '@/components/Board';
-import NextBlock from '@/components/NextBlock';
 import { myAppActions } from './store/myApp';
 import styles from '../styles/Home.module.scss';
 
@@ -12,8 +11,9 @@ const DropNumbersGame = () => {
   const HIGH_SPEED = 5;
   const NORMAL_SPEED = 1000;
   const dispatch = useDispatch();
-  const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const board = useSelector((state: MyAppState) => state.myApp.board);
+  const nextBlockArea = useSelector((state: MyAppState) => state.myApp.nextBlockArea);
+  const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const isBeginning = useSelector((state: MyAppState) => state.myApp.isBeginning);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
@@ -51,11 +51,14 @@ const DropNumbersGame = () => {
 
   const prepareNextBlock = useCallback((): number => {
     const index = Math.floor(Math.random() * 7) % blockList1.length;
+    const cloneNextBlockArea = structuredClone(nextBlockArea);
 
     dispatch(myAppActions.setNextBlock(blockList1[index]));
+    cloneNextBlockArea[colIndex.current] = blockList1[index];
+    dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea));
 
     return index;
-  }, [dispatch]);
+  }, [dispatch, nextBlockArea]);
 
   const updateBoard = useCallback(
     (rowIndex: number, currentBoard: Block[][], currentBlockIndex: number): Block[][] => {
@@ -182,9 +185,6 @@ const DropNumbersGame = () => {
       </Head>
       <div className={styles.curtain_open}>
         <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen flex flex-col justify-center items-center'>
-          <div className='flex justify-center items-center m-5'>
-            <NextBlock />
-          </div>
           <Board />
         </div>
       </div>

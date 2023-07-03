@@ -1,6 +1,7 @@
 import type { MyAppState } from '@/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { myAppActions } from '@/pages/store/myApp';
+import NextBlockArea from './NextBlockArea';
 import styles from '../styles/Home.module.scss';
 
 const Board = () => {
@@ -38,6 +39,7 @@ const Board = () => {
 
   return (
     <div className={`${styles.metallic} mb-10 p-5`}>
+      <NextBlockArea />
       {board.map((row, rowIndex) => {
         return (
           <div key={rowIndex} className='flex justify-center items-center'>
