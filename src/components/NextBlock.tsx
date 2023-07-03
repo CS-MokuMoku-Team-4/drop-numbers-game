@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import type { MyAppState } from '@/types';
+import { useSelector } from 'react-redux';
 import styles from '../styles/Home.module.scss';
 
 const NextBlock = () => {

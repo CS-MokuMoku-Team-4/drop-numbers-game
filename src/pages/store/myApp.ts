@@ -1,7 +1,6 @@
-import { blockList1 } from '@/consts/blocks';
-import { initialBoard } from '@/consts/initialBoard';
 import type { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
+import { initialBoard } from '@/consts/initialBoard';
 
 const initialMyAppState = {
   board: initialBoard,

@@ -1,7 +1,7 @@
 import type { MyAppState } from '@/types';
-import styles from '../styles/Home.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { myAppActions } from '@/pages/store/myApp';
+import styles from '../styles/Home.module.scss';
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -33,8 +33,6 @@ const Board = () => {
       dispatch(myAppActions.setCurrentColumn(colIndex));
       dispatch(myAppActions.setIsMoving(false));
     }
-
-    return;
   };
 
   return (
@@ -46,7 +44,9 @@ const Board = () => {
               return (
                 <div
                   key={colIndex}
-                  onClick={() => handleClick(colIndex)}
+                  onClick={() => {
+                    handleClick(colIndex);
+                  }}
                   className={
                     col.num === 0
                       ? `${styles.cell} bg-black border-4 border-black`

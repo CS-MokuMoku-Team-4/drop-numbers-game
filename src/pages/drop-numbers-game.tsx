@@ -1,6 +1,6 @@
 import type { Block, MyAppState } from '@/types';
 import Head from 'next/head';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { blockList1 } from '@/consts/blocks';
 import Board from '@/components/Board';
@@ -9,15 +9,14 @@ import { myAppActions } from './store/myApp';
 import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
-  const FALL = 5;
-  const NORMAL = 1000;
+  const SPEED = 1000;
   const dispatch = useDispatch();
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const isBeginning = useSelector((state: MyAppState) => state.myApp.isBeginning);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const colIndex = useRef(currentColumn);
-  const speed = useRef(NORMAL);
+
   // const nextBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
   // const currentBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
 
@@ -47,67 +46,71 @@ const DropNumbersGame = () => {
   // dispatch(myAppActions.setBoard(initialBoard));
   // };
 
-  const prepareNextBlock = (): number => {
+  const prepareNextBlock = useCallback((): number => {
     const index = Math.floor(Math.random() * 7) % blockList1.length;
 
     dispatch(myAppActions.setNextBlock(blockList1[index]));
+
     return index;
-  };
+  }, [dispatch]);
 
-  const updateBoard = (
-    rowIndex: number,
-    currentBoard: Block[][],
-    currentBlockIndex: number,
-  ): Block[][] => {
-    let cloneBoard = structuredClone(currentBoard);
+  const updateBoard = useCallback(
+    (rowIndex: number, currentBoard: Block[][], currentBlockIndex: number): Block[][] => {
+      const cloneBoard = structuredClone(currentBoard);
 
-    cloneBoard[rowIndex][colIndex.current] = blockList1[currentBlockIndex];
-    dispatch(myAppActions.setBoard(cloneBoard));
+      cloneBoard[rowIndex][colIndex.current] = blockList1[currentBlockIndex];
+      dispatch(myAppActions.setBoard(cloneBoard));
 
-    return cloneBoard;
-  };
+      return cloneBoard;
+    },
+    [dispatch],
+  );
 
-  const dropNextBlock = (
-    rowIndex: number,
-    currentBoard: Block[][],
-    nextBlockIndex: number,
-  ) => {
-    dispatch(myAppActions.setIsMoving(false));
-    speed.current = NORMAL;
-    // currentBlockIndexRef.current = nextBlockIndexRef.current;
-    dropBlock(rowIndex, currentBoard, nextBlockIndex, prepareNextBlock());
-  };
+  const isBottom = useCallback(
+    (rowIndex: number, currentBoard: Block[][]) => {
+      return rowIndex >= board.length - 1 || currentBoard[rowIndex + 1][colIndex.current].num !== 0;
+    },
+    [board.length],
+  );
 
-  const dropBlock = (
-    rowIndex: number,
-    currentBoard: Block[][],
-    currentBlockIndex: number,
-    nextBlockIndex: number,
-  ) => {
-    if (!isGameOver(currentBoard)) {
-      setTimeout(() => {
-        updateBoard(rowIndex, currentBoard, currentBlockIndex);
+  const dropBlock = useCallback(
+    (
+      rowIndex: number,
+      currentBoard: Block[][],
+      currentBlockIndex: number,
+      nextBlockIndex: number,
+    ): void => {
+      if (!isGameOver(currentBoard)) {
+        setTimeout(() => {
+          updateBoard(rowIndex, currentBoard, currentBlockIndex);
 
-        if (isBottom(rowIndex, currentBoard)) {
-          // 一番下に到達した場合
-          let newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
-          dispatch(myAppActions.setCurrentRow(0));
-          dropNextBlock(0, newBoard, nextBlockIndex); // 次のブロック
-        } else {
-          dispatch(myAppActions.setCurrentRow(rowIndex + 1));
-          dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
-        }
-      }, speed.current);
-    } else {
-      console.log('Game Over!!');
-    }
-  };
+          if (isBottom(rowIndex, currentBoard)) {
+            // 一番下に到達した場合
+            const newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
+            dispatch(myAppActions.setCurrentRow(0));
+            dropNextBlock(0, newBoard, nextBlockIndex); // 次のブロック
+          } else {
+            dispatch(myAppActions.setCurrentRow(rowIndex + 1));
+            dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
+          }
+        }, SPEED);
+      } else {
+        console.log('Game Over!!');
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dispatch, isBottom, updateBoard],
+  );
 
-  const isBottom = (rowIndex: number, currentBoard: Block[][]) => {
-    return rowIndex >= board.length - 1 || currentBoard[rowIndex + 1][colIndex.current].num !== 0;
-  };
+  const dropNextBlock = useCallback(
+    (rowIndex: number, currentBoard: Block[][], nextBlockIndex: number): void => {
+      dispatch(myAppActions.setIsMoving(false));
+      dropBlock(rowIndex, currentBoard, nextBlockIndex, prepareNextBlock());
+    },
+    [dispatch, dropBlock, prepareNextBlock],
+  );
 
-  const isGameOver = (currentBoard: Block[][]) => {
+  const isGameOver = (currentBoard: Block[][]): boolean => {
     console.log(currentBoard);
 
     return currentBoard[0][colIndex.current].num !== 0;
@@ -120,7 +123,7 @@ const DropNumbersGame = () => {
     const currentBlockIndex = Math.floor(Math.random() * 7) % blockList1.length;
 
     dropNextBlock(0, board, currentBlockIndex);
-  }, []);
+  }, [board, dispatch, dropNextBlock]);
 
   useEffect(() => {
     if (isBeginning) {
@@ -129,13 +132,10 @@ const DropNumbersGame = () => {
 
     if (!isMoving) {
       colIndex.current = currentColumn;
-      speed.current = NORMAL;
-    } else {
-      speed.current = FALL;
     }
-    console.log(isMoving);
-  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving, speed]);
+  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving]);
 
+  // キー入力
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {
   //   switch (event.keyCode) {
   //     case 39:
