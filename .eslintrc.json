@@ -232,8 +232,7 @@
 
     // Next.js における img 要素の使用を禁止するルール
     // 一般的な静的サイト構築において img 要素の全面禁止は不便なので無効化
-    "@next/next/no-img-element": "off",
-    "no-use-before-define": "off"
+    "@next/next/no-img-element": "off"
   },
   "overrides": [
     {

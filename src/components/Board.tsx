@@ -9,9 +9,10 @@ const Board = () => {
   const currentRow = useSelector((state: MyAppState) => state.myApp.currentRow);
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
+  const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
 
   const handleClick = (colIndex: number) => {
-    if (!isMoving) {
+    if (!isMoving && !isMoved) {
       let tempCol = currentColumn;
 
       dispatch(myAppActions.setIsMoving(true));
@@ -29,8 +30,8 @@ const Board = () => {
           } else break;
         }
       }
-
       dispatch(myAppActions.setCurrentColumn(colIndex));
+      dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
     }
   };

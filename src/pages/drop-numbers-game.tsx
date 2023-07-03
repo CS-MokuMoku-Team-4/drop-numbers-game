@@ -9,13 +9,16 @@ import { myAppActions } from './store/myApp';
 import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
-  const SPEED = 1000;
+  const HIGH_SPEED = 5;
+  const NORMAL_SPEED = 1000;
   const dispatch = useDispatch();
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const isBeginning = useSelector((state: MyAppState) => state.myApp.isBeginning);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
+  const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
   const colIndex = useRef(currentColumn);
+  const isMovedRef = useRef(isMoved);
 
   // const nextBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
   // const currentBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
@@ -81,25 +84,30 @@ const DropNumbersGame = () => {
       nextBlockIndex: number,
     ): void => {
       if (!isGameOver(currentBoard)) {
-        setTimeout(() => {
-          updateBoard(rowIndex, currentBoard, currentBlockIndex);
+        setTimeout(
+          () => {
+            updateBoard(rowIndex, currentBoard, currentBlockIndex);
 
-          if (isBottom(rowIndex, currentBoard)) {
-            // 一番下に到達した場合
-            const newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
-            dispatch(myAppActions.setCurrentRow(0));
-            dropNextBlock(0, newBoard, nextBlockIndex); // 次のブロック
-          } else {
-            dispatch(myAppActions.setCurrentRow(rowIndex + 1));
-            dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
-          }
-        }, SPEED);
+            if (isBottom(rowIndex, currentBoard)) {
+              // 一番下に到達した場合
+              const newBoard = updateBoard(rowIndex, currentBoard, currentBlockIndex);
+              dispatch(myAppActions.setCurrentRow(0));
+              dispatch(myAppActions.setIsMoving(false));
+              dispatch(myAppActions.setIsMoved(false));
+              isMovedRef.current = false;
+              dropBlock(0, newBoard, nextBlockIndex, prepareNextBlock()); // 次のブロック
+            } else {
+              dispatch(myAppActions.setCurrentRow(rowIndex + 1));
+              dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
+            }
+          },
+          isMovedRef.current ? HIGH_SPEED : NORMAL_SPEED,
+        );
       } else {
         console.log('Game Over!!');
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dispatch, isBottom, updateBoard],
+    [dispatch, isBottom, prepareNextBlock, updateBoard],
   );
 
   const dropNextBlock = useCallback(
@@ -133,7 +141,11 @@ const DropNumbersGame = () => {
     if (!isMoving) {
       colIndex.current = currentColumn;
     }
-  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving]);
+
+    if (isMoved) {
+      isMovedRef.current = true;
+    }
+  }, [isBeginning, gameStart, currentColumn, colIndex, isMoving, isMoved]);
 
   // キー入力
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {

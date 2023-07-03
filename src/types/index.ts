@@ -7,6 +7,7 @@ export type MyAppState = {
     currentRow: number;
     isBeginning: boolean;
     isMoving: boolean;
+    isMoved: boolean;
   };
 };
 
