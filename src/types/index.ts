@@ -8,6 +8,7 @@ export type MyAppState = {
     currentRow: number;
     isMoving: boolean;
     isMoved: boolean;
+    isMerged: boolean;
   };
 };
 

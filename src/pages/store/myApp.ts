@@ -27,6 +27,7 @@ const initialMyAppState = {
   currentRow: -1,
   isMoving: false,
   isMoved: false,
+  isMerged: false,
 };
 
 const myAppSlice = createSlice({
@@ -68,6 +69,9 @@ const myAppSlice = createSlice({
     },
     setIsMoved: (state: { isMoved: boolean }, action: { payload: boolean }) => {
       state.isMoved = action.payload;
+    },
+    setIsMerged: (state: { isMerged: boolean }, action: { payload: boolean }) => {
+      state.isMerged = action.payload;
     },
   },
 });
