@@ -381,14 +381,16 @@ const DropNumbersGame = () => {
 
         if (isBottom(rowIndex, newBoard1)) {
           // 一番下に到達した場合
-          let newBoard2 = updateBoard(rowIndex, newBoard1, currentBlockIndex);
-          newBoard2 = numberCheck(rowIndex, colIndex.current, newBoard2);
-          dispatch(myAppActions.setCurrentRow(0));
-          dispatch(myAppActions.setIsMoving(false));
-          dispatch(myAppActions.setIsMoved(false));
-          isMovedRef.current = false;
-          dispatch(myAppActions.setIsMerged(false));
-          dropBlock(0, newBoard2, nextBlockIndex, prepareNextBlock()); // 次のブロック
+          setTimeout(() => {
+            let newBoard2 = updateBoard(rowIndex, newBoard1, currentBlockIndex);
+            newBoard2 = numberCheck(rowIndex, colIndex.current, newBoard2);
+            dispatch(myAppActions.setCurrentRow(0));
+            dispatch(myAppActions.setIsMoving(false));
+            dispatch(myAppActions.setIsMoved(false));
+            isMovedRef.current = false;
+            dispatch(myAppActions.setIsMerged(false));
+            dropBlock(0, newBoard2, nextBlockIndex, prepareNextBlock()); // 次のブロック
+          }, NORMAL_SPEED);
         } else {
           setTimeout(
             () => {
