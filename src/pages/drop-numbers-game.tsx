@@ -18,7 +18,7 @@ const DropNumbersGame = () => {
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
-  // const isMerged = useSelector((state: MyAppState) => state.myApp.isMerged);
+  const isMerged = useSelector((state: MyAppState) => state.myApp.isMerged);
   const colIndex = useRef(currentColumn);
   const isMovedRef = useRef(isMoved);
   const startRef = useRef(true);
@@ -94,14 +94,15 @@ const DropNumbersGame = () => {
     [dispatch],
   );
 
-  const isBottom = useCallback(
-    (rowIndex: number, currentBoard: Block[][]) => {
-      return (
-        rowIndex === board.length - 1 || currentBoard[rowIndex + 1][colIndex.current].num !== 0
-      );
-    },
-    [board],
-  );
+  const isBottom = useCallback((rowIndex: number, currentBoard: Block[][]) => {
+    console.log(currentBoard);
+    console.log(rowIndex + 1);
+
+    return (
+      rowIndex === Config.board.size.col - 1 ||
+      currentBoard[rowIndex + 1][colIndex.current].num !== 0
+    );
+  }, []);
 
   // ブロックがマージされた結果、空洞ができたかどうかチェックする
   const isHole = useCallback((row: number, col: number, currentBoard: Block[][]): boolean => {
@@ -314,53 +315,49 @@ const DropNumbersGame = () => {
       }
 
       if (count > 0) {
-        // 右側の空洞をチェック
-        while (
-          rowIndex - 1 >= 0 &&
-          colIndex + 1 < Config.board.size.row &&
-          isHole(rowIndex, colIndex + 1, cloneBoard)
-        ) {
-          while (
-            colIndex + 1 < Config.board.size.row &&
-            isHole(rowIndex, colIndex + 1, cloneBoard)
-          ) {
+        // 右側の空洞を埋める
+        while (colIndex + 1 < Config.board.size.row && isHole(rowIndex, colIndex + 1, cloneBoard)) {
+          while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex + 1, cloneBoard)) {
             cloneBoard = fillHole(rowIndex, colIndex + 1, cloneBoard);
+            rowIndex--;
+          }
+          // 列の空洞がすべて埋まったら上からnumberCheck
+          while (
+            rowIndex + 1 < Config.board.size.col &&
+            isTheSameNumber(rowIndex, colIndex + 1, rowIndex + 1, colIndex + 1, cloneBoard)
+          ) {
             cloneBoard = numberCheck(rowIndex, colIndex + 1, cloneBoard);
-            colIndex++;
+            rowIndex++;
           }
-          rowIndex--;
+          colIndex++;
+          rowIndex = row;
         }
 
         rowIndex = row;
         colIndex = col;
 
-        // 左側の空洞をチェック
-        while (
-          rowIndex - 1 >= 0 &&
-          colIndex - 1 >= 0 &&
-          isHole(rowIndex, colIndex - 1, cloneBoard)
-        ) {
-          while (colIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
-            console.log(rowIndex, colIndex);
+        // 左側の空洞を埋める
+        while (colIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
+          while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
             cloneBoard = fillHole(rowIndex, colIndex - 1, cloneBoard);
-            cloneBoard = numberCheck(rowIndex, colIndex - 1, cloneBoard);
-            colIndex--;
+            rowIndex--;
           }
-          rowIndex--;
+          colIndex--;
         }
 
-        rowIndex = row;
-        colIndex = col;
+        rowIndex = 0;
+        colIndex = 0;
 
-        // 下の段をチェック
-        while (
-          rowIndex + 1 < Config.board.size.col &&
-          isTheSameNumber(rowIndex, colIndex, rowIndex + 1, colIndex, cloneBoard)
-        ) {
-          cloneBoard = numberCheck(rowIndex + 1, colIndex, cloneBoard);
-          console.log(cloneBoard[rowIndex][colIndex]);
-          console.log(cloneBoard[rowIndex + 1][colIndex]);
-          rowIndex++;
+        // 空洞がすべて埋まったら上からnumberCheck
+        while (colIndex < Config.board.size.row) {
+          while (rowIndex < Config.board.size.col) {
+            console.log(cloneBoard[rowIndex][colIndex]);
+            if (cloneBoard[rowIndex][colIndex].num !== 0) {
+              cloneBoard = numberCheck(rowIndex, colIndex, cloneBoard);
+            }
+            rowIndex++;
+          }
+          colIndex++;
         }
       }
 
@@ -445,7 +442,9 @@ const DropNumbersGame = () => {
     if (isMoved) {
       isMovedRef.current = true;
     }
-  }, [gameStart, currentColumn, colIndex, isMoving, isMoved]);
+
+    console.log(isMerged);
+  }, [gameStart, currentColumn, colIndex, isMoving, isMoved, isMerged]);
 
   // キー入力
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {
