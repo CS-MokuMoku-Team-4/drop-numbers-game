@@ -6,15 +6,15 @@ const NextBlockArea = () => {
   const nextBlockArea = useSelector((state: MyAppState) => state.myApp.nextBlockArea);
 
   return (
-    <div className='flex justify-center items-center bg-slate-800 mb-3'>
+    <div className='flex justify-center items-center bg-slate-800 border-4 border-slate-900 border-b-slate-700 border-r-slate-700 mb-3'>
       {nextBlockArea.map((col, colIndex) => {
         return (
           <div
             key={colIndex}
             className={
               col.num === 0
-                ? `${styles.cell} bg-black border-4 border-black`
-                : `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white visible opacity-100 duration-[500ms] delay-[1000ms]`
+                ? `${styles.cell} bg-slate-800`
+                : `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white visible opacity-100 duration-[500ms]`
             }
           >
             {col.num !== 0 && col.num}

@@ -206,7 +206,6 @@ const DropNumbersGame = () => {
           cloneBoard[row][col] = mergedBlock;
           break;
       }
-
       console.log('Double Merge!');
 
       dispatch(myAppActions.setBoard(cloneBoard));
@@ -359,9 +358,9 @@ const DropNumbersGame = () => {
           isTheSameNumber(rowIndex, colIndex, rowIndex + 1, colIndex, cloneBoard)
         ) {
           cloneBoard = numberCheck(rowIndex + 1, colIndex, cloneBoard);
-          rowIndex++;
           console.log(cloneBoard[rowIndex][colIndex]);
           console.log(cloneBoard[rowIndex + 1][colIndex]);
+          rowIndex++;
         }
       }
 

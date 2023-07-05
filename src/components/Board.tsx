@@ -2,7 +2,6 @@ import type { MyAppState } from '@/types';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { myAppActions } from '@/pages/store/myApp';
-import AnimationBoard from './AnimationBoard';
 import NextBlockArea from './NextBlockArea';
 import styles from '../styles/Home.module.scss';
 
@@ -15,6 +14,9 @@ const Board = () => {
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
   const isMerged = useSelector((state: MyAppState) => state.myApp.isMerged);
   const currentColRef = useRef(currentColumn);
+  const classNames = (...classes: string[]) => {
+    return classes.filter(Boolean).join(' ');
+  };
 
   const handleClick = (colIndex: number) => {
     if (!isMoving && !isMoved) {
@@ -54,39 +56,37 @@ const Board = () => {
   };
 
   return (
-    <>
-      {isMerged ? <div className='text-black'>isMerged</div>: <div className='text-black'>isNotMerged</div>}
-      <div className={`${styles.metallic} mb-10 p-5`}>
-        <NextBlockArea />
-        {isMerged ? (
-          <AnimationBoard />
-        ) : (
-          board.map((row, rowIndex) => {
-            return (
-              <div key={rowIndex} className='flex justify-center items-center'>
-                {row.map((col, colIndex) => {
-                  return (
-                    <div
-                      key={colIndex}
-                      onClick={() => {
-                        handleClick(colIndex);
-                      }}
-                      className={
-                        col.num === 0
-                          ? `${styles.cell} bg-black border-4 border-black`
-                          : `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`
-                      }
-                    >
-                      {col.num !== 0 && col.num}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })
-        )}
+    <div className={`${styles.metallic} mb-10 p-5`}>
+      <NextBlockArea />
+      <div className='bg-black border-4 border-slate-800 border-b-slate-700 border-r-slate-700'>
+        {board.map((row, rowIndex) => {
+          return (
+            <div key={rowIndex} className='flex justify-center items-center'>
+              {row.map((col, colIndex) => {
+                return (
+                  <div
+                    key={colIndex}
+                    onClick={() => {
+                      handleClick(colIndex);
+                    }}
+                    className={classNames(
+                      isMerged
+                        ? `visible opacity-100 duration-[100ms]`
+                        : col.num === 0
+                        ? `bg-black border-4 border-black`
+                        : `${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`,
+                      `${styles.cell}`,
+                    )}
+                  >
+                    {col.num !== 0 && col.num}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

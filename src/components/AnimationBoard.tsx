@@ -20,7 +20,7 @@ const AnimationBoard = () => {
                   className={classNames(
                     col.num === 0
                       ? `invisible opacity-0 duration-[3000ms]`
-                      : ` visible opacity-100 duration-[1000ms] delay-[1500ms] ${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`,
+                      : `visible opacity-100 duration-[1000ms] delay-[1500ms] ${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`,
                   )}
                 >
                   {col.num !== 0 && col.num}
