@@ -2,7 +2,7 @@ export const Config = {
   board: {
     size: {
       row: 5,
-      col: 7,
+      col: 8,
     },
   },
 };

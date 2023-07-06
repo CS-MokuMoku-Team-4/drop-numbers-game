@@ -20,4 +20,5 @@ export type Block = {
   borderColor: string;
   textSize: string;
   textSizeSmall: string;
+  isMerged: boolean;
 };

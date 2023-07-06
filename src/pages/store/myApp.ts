@@ -13,6 +13,7 @@ const initialMyAppState = {
     borderColor: 'border-red-800',
     textSize: 'text-4xl',
     textSizeSmall: 'text-3xl',
+    isMerged: false,
   },
   nextBlock: {
     num: 4,
@@ -22,6 +23,7 @@ const initialMyAppState = {
     borderColor: 'border-orange-800',
     textSize: 'text-4xl',
     textSizeSmall: 'text-3xl',
+    isMerged: false,
   },
   currentColumn: 2,
   currentRow: -1,

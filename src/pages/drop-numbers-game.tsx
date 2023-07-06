@@ -32,6 +32,7 @@ const DropNumbersGame = () => {
       borderColor: 'border-black',
       textSize: 'text-4xl',
       textSizeSmall: 'text-3xl',
+      isMerged: false,
     }),
     [],
   );
@@ -95,9 +96,6 @@ const DropNumbersGame = () => {
   );
 
   const isBottom = useCallback((rowIndex: number, currentBoard: Block[][]) => {
-    console.log(currentBoard);
-    console.log(rowIndex + 1);
-
     return (
       rowIndex === Config.board.size.col - 1 ||
       currentBoard[rowIndex + 1][colIndex.current].num !== 0
@@ -158,18 +156,23 @@ const DropNumbersGame = () => {
       currentNumber: number,
       currentBoard: Block[][],
     ): Block[][] => {
-      currentNumber *= 2;
-      dispatch(myAppActions.setIsMerged(true));
-
-      const mergedBlock = blockList8[calculateIndex(currentNumber)];
       const cloneBoard = structuredClone(currentBoard);
 
-      cloneBoard[mergedRow][mergedCol] = EMPTY_BLOCK;
-      cloneBoard[row][col] = mergedBlock;
-      console.log('Merge!');
-      console.log(cloneBoard[row][col]);
+      if (currentNumber !== 0) {
+        currentNumber *= 2;
+        dispatch(myAppActions.setIsMerged(true));
 
-      dispatch(myAppActions.setBoard(cloneBoard));
+        const newBlock = blockList8[calculateIndex(currentNumber)];
+        const mergedBlock = structuredClone(newBlock);
+
+        cloneBoard[mergedRow][mergedCol] = EMPTY_BLOCK;
+        mergedBlock.isMerged = true;
+        cloneBoard[row][col] = mergedBlock;
+        dispatch(myAppActions.setBoard(cloneBoard));
+
+        console.log('Merge!');
+        console.log(cloneBoard[row][col]);
+      }
 
       return cloneBoard;
     },
@@ -184,32 +187,40 @@ const DropNumbersGame = () => {
       currentNumber: number,
       currentBoard: Block[][],
     ): Block[][] => {
-      currentNumber *= 4;
-      dispatch(myAppActions.setIsMerged(true));
-
-      const mergedBlock = blockList8[calculateIndex(currentNumber)];
       const cloneBoard = structuredClone(currentBoard);
 
-      switch (mergedBlocks) {
-        case 'RIGHT_BOTTOM':
-          cloneBoard[row][col + 1] = EMPTY_BLOCK;
-          cloneBoard[row][col] = EMPTY_BLOCK;
-          cloneBoard[row + 1][col] = mergedBlock;
-          break;
-        case 'LEFT_BOTTOM':
-          cloneBoard[row][col - 1] = EMPTY_BLOCK;
-          cloneBoard[row][col] = EMPTY_BLOCK;
-          cloneBoard[row + 1][col] = mergedBlock;
-          break;
-        default:
-          cloneBoard[row][col - 1] = EMPTY_BLOCK;
-          cloneBoard[row][col + 1] = EMPTY_BLOCK;
-          cloneBoard[row][col] = mergedBlock;
-          break;
-      }
-      console.log('Double Merge!');
+      if (currentNumber !== 0) {
+        currentNumber *= 4;
+        dispatch(myAppActions.setIsMerged(true));
 
-      dispatch(myAppActions.setBoard(cloneBoard));
+        const newBlock = blockList8[calculateIndex(currentNumber)];
+        const mergedBlock = structuredClone(newBlock);
+
+        switch (mergedBlocks) {
+          case 'RIGHT_BOTTOM':
+            cloneBoard[row][col + 1] = EMPTY_BLOCK;
+            cloneBoard[row][col] = EMPTY_BLOCK;
+            mergedBlock.isMerged = true;
+            cloneBoard[row + 1][col] = mergedBlock;
+            dispatch(myAppActions.setBoard(cloneBoard));
+            break;
+          case 'LEFT_BOTTOM':
+            cloneBoard[row][col - 1] = EMPTY_BLOCK;
+            cloneBoard[row][col] = EMPTY_BLOCK;
+            mergedBlock.isMerged = true;
+            cloneBoard[row + 1][col] = mergedBlock;
+            dispatch(myAppActions.setBoard(cloneBoard));
+            break;
+          default:
+            cloneBoard[row][col - 1] = EMPTY_BLOCK;
+            cloneBoard[row][col + 1] = EMPTY_BLOCK;
+            mergedBlock.isMerged = true;
+            cloneBoard[row][col] = mergedBlock;
+            dispatch(myAppActions.setBoard(cloneBoard));
+            break;
+        }
+        console.log('Double Merge!');
+      }
 
       return cloneBoard;
     },
@@ -218,21 +229,25 @@ const DropNumbersGame = () => {
 
   const tripleMerge = useCallback(
     (row: number, col: number, currentNumber: number, currentBoard: Block[][]): Block[][] => {
-      currentNumber *= 8;
-      dispatch(myAppActions.setIsMerged(true));
-
-      const mergedBlock = blockList8[calculateIndex(currentNumber)];
       const cloneBoard = structuredClone(currentBoard);
 
-      cloneBoard[row][col - 1] = EMPTY_BLOCK;
-      cloneBoard[row][col + 1] = EMPTY_BLOCK;
-      cloneBoard[row][col] = EMPTY_BLOCK;
-      cloneBoard[row + 1][col] = mergedBlock;
+      if (currentNumber !== 0) {
+        currentNumber *= 8;
+        dispatch(myAppActions.setIsMerged(true));
 
-      console.log('Triple Merge!');
-      console.log(cloneBoard[row][col]);
+        const newBlock = blockList8[calculateIndex(currentNumber)];
+        const mergedBlock = structuredClone(newBlock);
 
-      dispatch(myAppActions.setBoard(cloneBoard));
+        cloneBoard[row][col - 1] = EMPTY_BLOCK;
+        cloneBoard[row][col + 1] = EMPTY_BLOCK;
+        cloneBoard[row][col] = EMPTY_BLOCK;
+        mergedBlock.isMerged = true;
+        cloneBoard[row + 1][col] = mergedBlock;
+        dispatch(myAppActions.setBoard(cloneBoard));
+
+        console.log('Triple Merge!');
+        console.log(cloneBoard[row][col]);
+      }
 
       return cloneBoard;
     },
@@ -276,6 +291,7 @@ const DropNumbersGame = () => {
         cloneBoard = tripleMerge(row, col, currentNumber, cloneBoard);
         console.log(cloneBoard[row + 1][col]);
         cloneBoard = numberCheck(row + 1, col, cloneBoard);
+        rowIndex = row + 1;
       }
 
       if (mergedRight && mergedLeft) {
@@ -288,12 +304,14 @@ const DropNumbersGame = () => {
         cloneBoard = doubleMerge('RIGHT_BOTTOM', row, col, currentNumber, cloneBoard);
         console.log(cloneBoard[row + 1][col]);
         cloneBoard = numberCheck(row + 1, col, cloneBoard);
+        rowIndex = row + 1;
       }
 
       if (mergedBottom && mergedLeft) {
         cloneBoard = doubleMerge('LEFT_BOTTOM', row, col, currentNumber, cloneBoard);
         console.log(cloneBoard[row + 1][col]);
         cloneBoard = numberCheck(row + 1, col, cloneBoard);
+        rowIndex = row + 1;
       }
 
       if (count === 1 && mergedRight) {
@@ -312,53 +330,40 @@ const DropNumbersGame = () => {
         cloneBoard = mergeBlocks(row + 1, col, row, col, currentNumber, cloneBoard);
         console.log(cloneBoard[row + 1][col]);
         cloneBoard = numberCheck(row + 1, col, cloneBoard);
+        rowIndex = row + 1;
       }
 
-      if (count > 0) {
-        // 右側の空洞を埋める
-        while (colIndex + 1 < Config.board.size.row && isHole(rowIndex, colIndex + 1, cloneBoard)) {
-          while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex + 1, cloneBoard)) {
-            cloneBoard = fillHole(rowIndex, colIndex + 1, cloneBoard);
-            rowIndex--;
-          }
-          // 列の空洞がすべて埋まったら上からnumberCheck
-          while (
-            rowIndex + 1 < Config.board.size.col &&
-            isTheSameNumber(rowIndex, colIndex + 1, rowIndex + 1, colIndex + 1, cloneBoard)
-          ) {
-            cloneBoard = numberCheck(rowIndex, colIndex + 1, cloneBoard);
-            rowIndex++;
-          }
-          colIndex++;
-          rowIndex = row;
+      // 右側の空洞を埋める
+      while (colIndex + 1 < Config.board.size.row && isHole(rowIndex, colIndex + 1, cloneBoard)) {
+        while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex + 1, cloneBoard)) {
+          cloneBoard = fillHole(rowIndex, colIndex + 1, cloneBoard);
+          cloneBoard = numberCheck(rowIndex, colIndex + 1, cloneBoard);
+          rowIndex--;
         }
+        // 列の空洞がすべて埋まったら上からnumberCheck
+        // while (rowIndex + 1 < Config.board.size.col) {
+        //   cloneBoard = numberCheck(rowIndex, colIndex + 1, cloneBoard);
+        //   rowIndex++;
+        // }
+        colIndex++;
+      }
 
-        rowIndex = row;
-        colIndex = col;
+      rowIndex = row;
+      colIndex = col;
 
-        // 左側の空洞を埋める
-        while (colIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
-          while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
-            cloneBoard = fillHole(rowIndex, colIndex - 1, cloneBoard);
-            rowIndex--;
-          }
-          colIndex--;
+      // 左側の空洞を埋める
+      while (colIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
+        while (rowIndex - 1 >= 0 && isHole(rowIndex, colIndex - 1, cloneBoard)) {
+          cloneBoard = fillHole(rowIndex, colIndex - 1, cloneBoard);
+          cloneBoard = numberCheck(rowIndex, colIndex - 1, cloneBoard);
+          rowIndex--;
         }
-
-        rowIndex = 0;
-        colIndex = 0;
-
-        // 空洞がすべて埋まったら上からnumberCheck
-        while (colIndex < Config.board.size.row) {
-          while (rowIndex < Config.board.size.col) {
-            console.log(cloneBoard[rowIndex][colIndex]);
-            if (cloneBoard[rowIndex][colIndex].num !== 0) {
-              cloneBoard = numberCheck(rowIndex, colIndex, cloneBoard);
-            }
-            rowIndex++;
-          }
-          colIndex++;
-        }
+        // 列の空洞がすべて埋まったら上からnumberCheck
+        // while (rowIndex + 1 < Config.board.size.col) {
+        //   cloneBoard = numberCheck(rowIndex, colIndex - 1, cloneBoard);
+        //   rowIndex++;
+        // }
+        colIndex--;
       }
 
       return cloneBoard;
@@ -440,6 +445,7 @@ const DropNumbersGame = () => {
     }
 
     if (isMoved) {
+      colIndex.current = currentColumn;
       isMovedRef.current = true;
     }
 
