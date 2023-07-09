@@ -38,35 +38,6 @@ const DropNumbersGame = () => {
     [],
   );
 
-  // const nextBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
-  // const currentBlockIndexRef = useRef(Math.floor(Math.random() * 7) % blockList1.length);
-
-  // const initializeBoard = () => {
-  // const initialBoard: Block[][] = [];
-  // let initialRow: Block[] = [];
-
-  // for (let i = 0; i < Config.board.size.col; i++) {
-  //   initialRow = [];
-  //   for (let j = 0; j < Config.board.size.row; j++) {
-  //     const emptyBlock: Block = {
-  //       num: 0,
-  //       color: 'bg-black',
-  //       topColor: 'border-t-black',
-  //       leftColor: 'border-l-black',
-  //       borderColor: 'border-black',
-  //       textSize: 'text-4xl',
-  //       textSizeNext: 'text-3xl',
-  //       rowIndex: j,
-  //       colIndex: i,
-  //     };
-  //     initialRow.push(emptyBlock);
-  //   }
-  //   initialBoard.push(initialRow);
-  // }
-
-  // dispatch(myAppActions.setBoard(initialBoard));
-  // };
-
   const prepareNextBlock = useCallback((): number => {
     const index = Math.floor(Math.random() * 7) % blockList1.length;
     const cloneNextBlockArea1 = structuredClone(nextBlockArea);
@@ -75,11 +46,9 @@ const DropNumbersGame = () => {
     cloneNextBlockArea1[colIndex.current] = EMPTY_BLOCK;
     dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea1));
 
-    // setTimeout(() => {
     dispatch(myAppActions.setNextBlock(blockList1[index]));
     cloneNextBlockArea2[colIndex.current] = blockList1[index];
     dispatch(myAppActions.setNextBlockArea(cloneNextBlockArea2));
-    // }, 300);
 
     return index;
   }, [EMPTY_BLOCK, dispatch, nextBlockArea]);

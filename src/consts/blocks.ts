@@ -1,5 +1,16 @@
 import type { Block } from '@/types';
 
+export const EMPTY_BLOCK: Block = {
+  num: 0,
+  color: 'bg-black',
+  topColor: 'border-t-black',
+  leftColor: 'border-l-black',
+  borderColor: 'border-black',
+  textSize: 'text-4xl',
+  textSizeSmall: 'text-3xl',
+  isMerged: false,
+} as const;
+
 const block2: Block = {
   num: 2,
   color: 'bg-red-600',
