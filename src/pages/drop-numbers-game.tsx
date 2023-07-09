@@ -11,6 +11,7 @@ import styles from '../styles/Home.module.scss';
 const DropNumbersGame = () => {
   const HIGH_SPEED = 5;
   const NORMAL_SPEED = 1000;
+  const SLOW_SPEED = 2000;
   const dispatch = useDispatch();
   const board = useSelector((state: MyAppState) => state.myApp.board);
   const currentBlock = useSelector((state: MyAppState) => state.myApp.currentBlock);
@@ -341,11 +342,11 @@ const DropNumbersGame = () => {
           if (colIndex < 0) {
             colIndex++;
           }
-          
+
           if (colIndex >= Config.board.size.row) {
             break;
           }
-          
+
           let tempRow = rowIndex;
 
           while (tempRow - 1 >= 0) {
@@ -379,6 +380,8 @@ const DropNumbersGame = () => {
 
         if (isBottom(rowIndex, newBoard1)) {
           // 一番下に到達した場合
+          dispatch(myAppActions.setIsMoved(true));
+          isMovedRef.current = true;
           setTimeout(() => {
             let newBoard2 = updateBoard(rowIndex, newBoard1, currentBlockIndex);
             newBoard2 = numberCheck(rowIndex, colIndex.current, newBoard2);
@@ -395,7 +398,7 @@ const DropNumbersGame = () => {
               dispatch(myAppActions.setCurrentRow(rowIndex + 1));
               dropBlock(rowIndex + 1, currentBoard, currentBlockIndex, nextBlockIndex);
             },
-            isMovedRef.current ? HIGH_SPEED : NORMAL_SPEED,
+            isMovedRef.current ? HIGH_SPEED : SLOW_SPEED,
           );
         }
       } else {

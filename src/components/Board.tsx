@@ -50,6 +50,7 @@ const Board = () => {
           }
         }
       }
+      console.log('This block moved to ' + resultCol.toString());
       dispatch(myAppActions.setCurrentColumn(resultCol));
       dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
