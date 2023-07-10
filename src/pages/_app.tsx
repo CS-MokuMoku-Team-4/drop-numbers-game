@@ -2,7 +2,7 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Montserrat, Noto_Sans_JP } from 'next/font/google';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from '../store';
 
 const montserrat = Montserrat({
   weight: ['200', '400'],

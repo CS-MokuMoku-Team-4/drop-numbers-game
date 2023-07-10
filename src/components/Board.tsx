@@ -1,7 +1,7 @@
 import type { MyAppState } from '@/types';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { myAppActions } from '@/pages/store/myApp';
+import { myAppActions } from '@/store/myApp';
 import NextBlockArea from './NextBlockArea';
 import styles from '../styles/Home.module.scss';
 

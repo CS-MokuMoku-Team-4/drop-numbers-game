@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Config } from '@/config';
 import { blockList1, blockList8 } from '@/consts/blocks';
 import Board from '@/components/Board';
-import { myAppActions } from './store/myApp';
+import { myAppActions } from '../store/myApp';
 import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
