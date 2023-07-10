@@ -77,8 +77,8 @@ const Board = () => {
                           ? `bg-black border-black`
                           : `bg-slate-900 border-slate-900`
                         : col.isMerged
-                        ? `${styles.merge_block} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg`
-                        : `${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg`,
+                        ? `${styles.merge_block} ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`
+                        : ` ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`,
                       `${styles.cell} border-4 flex justify-center items-center`,
                     )}
                   >

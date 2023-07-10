@@ -14,7 +14,8 @@ export type MyAppState = {
 
 export type Block = {
   num: number;
-  color: string;
+  fromColor: string;
+  toColor: string;
   topColor: string;
   leftColor: string;
   borderColor: string;
