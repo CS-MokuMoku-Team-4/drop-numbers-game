@@ -75,7 +75,7 @@ const Board = () => {
                       col.num === 0
                         ? `bg-black border-4 border-black`
                         : col.isMerged
-                        ? `visible opacity-100 duration-[500ms]`
+                        ? `${styles.merge_block}`
                         : ``,
                       `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`,
                     )}

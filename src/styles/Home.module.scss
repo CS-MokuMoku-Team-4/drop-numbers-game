@@ -76,8 +76,8 @@
 
 /* Game Board */
 .cell {
-  width: 5rem;
-  height: 5rem;
+  width: 80px;
+  height: 80px;
 }
 
 .metallic {
@@ -93,6 +93,26 @@
 .next_block {
   width: 4rem;
   height: 4rem;
+}
+
+/* ブロックのアニメーション */
+.merge_block {
+  animation: merge 0.5s ease;
+}
+
+@keyframes merge {
+  0% {
+    opacity: 1;
+    transform: scale(100%);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
 }
 
 /* 画面遷移のアニメーション */

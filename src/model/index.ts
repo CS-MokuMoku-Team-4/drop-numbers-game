@@ -179,4 +179,16 @@ export class GameBoard {
 
     return row;
   }
+
+  clearIsMergedFlag(): void {
+    const cloneBoard = structuredClone(this.board);
+
+    for (let row = 0; row < Config.board.size.col; row++) {
+      for (let col = 0; col < Config.board.size.row; col++) {
+        cloneBoard[row][col].isMerged = false;
+      }
+    }
+
+    this.board = cloneBoard;
+  }
 }

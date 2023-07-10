@@ -14,7 +14,6 @@ const DropNumbersGame = () => {
   const NORMAL_SPEED = 1000;
   const SLOW_SPEED = 2000;
   const dispatch = useDispatch();
-  // const board = useSelector((state: MyAppState) => state.myApp.board);
   const currentBlock = useSelector((state: MyAppState) => state.myApp.currentBlock);
   const nextBlockArea = useSelector((state: MyAppState) => state.myApp.nextBlockArea);
   const currentRow = useSelector((state: MyAppState) => state.myApp.currentRow);
@@ -98,8 +97,12 @@ const DropNumbersGame = () => {
       }
 
       if (count > 0) {
-        dispatch(myAppActions.setBoard(gameBoard.board));
-        // const colIndex = col - 1;
+        setTimeout(() => {
+          dispatch(myAppActions.setBoard(gameBoard.board));
+          // すべての isMerged フラグをクリアする
+          gameBoard.clearIsMergedFlag();
+          dispatch(myAppActions.setBoard(gameBoard.board));
+        }, 500);
         // 空洞が無くなるまで埋める
         for (let colIndex = col - 1; colIndex <= col + 1; colIndex++) {
           if (colIndex < 0) {
@@ -118,12 +121,13 @@ const DropNumbersGame = () => {
               gameBoard.fillHole(tempRow, colIndex, rowIndexOfCap);
               dispatch(myAppActions.setBoard(gameBoard.board));
               numberCheck(tempRow, colIndex);
+              dispatch(myAppActions.setBoard(gameBoard.board));
             }
             tempRow--;
           }
-          console.log(col, colIndex);
         }
         numberCheck(rowIndex, col);
+        dispatch(myAppActions.setBoard(gameBoard.board));
       }
     },
     [dispatch, gameBoard],
@@ -159,6 +163,7 @@ const DropNumbersGame = () => {
           gameBoard.updateBoard(preRowIndex.current, preColIndex.current);
           dispatch(myAppActions.setBoard(gameBoard.board));
           numberCheck(gameBoard.currentRow, gameBoard.currentCol);
+
           gameBoard.currentRow = 0;
           dispatch(myAppActions.setCurrentRow(0));
           prepareNextBlock();
