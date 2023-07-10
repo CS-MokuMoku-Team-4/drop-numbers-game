@@ -1,6 +1,6 @@
 import type { Block } from '@/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { initialBoard, initialNextBlocks } from '@/consts/initialBoard';
+import { initialBoard, initialNextBlocks } from '@/consts/blocks';
 
 const initialMyAppState = {
   board: initialBoard,
@@ -44,7 +44,8 @@ const myAppSlice = createSlice({
     ) => {
       state.board = action.payload;
     },
-    setNextBlockArea: ( state: { nextBlockArea: Block[] },
+    setNextBlockArea: (
+      state: { nextBlockArea: Block[] },
       action: {
         payload: Block[];
       },
