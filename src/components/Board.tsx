@@ -73,11 +73,13 @@ const Board = () => {
                     }}
                     className={classNames(
                       col.num === 0
-                        ? `bg-black border-4 border-black`
+                        ? colIndex % 2 === 0
+                          ? `bg-black border-black`
+                          : `bg-slate-900 border-slate-900`
                         : col.isMerged
-                        ? `${styles.merge_block}`
-                        : ``,
-                      `${styles.cell} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white`,
+                        ? `${styles.merge_block} ${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg`
+                        : `${col.color} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg`,
+                      `${styles.cell} border-4 flex justify-center items-center`,
                     )}
                   >
                     {col.num !== 0 && col.num}

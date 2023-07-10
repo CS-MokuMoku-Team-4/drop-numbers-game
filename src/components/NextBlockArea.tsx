@@ -14,7 +14,7 @@ const NextBlockArea = () => {
             className={
               col.num === 0
                 ? `${styles.cell} bg-slate-800`
-                : `${styles.next_block} ${col.color} ${col.textSizeSmall} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white visible opacity-100 duration-[500ms]`
+                : `${styles.next_block} ${col.color} ${col.textSizeSmall} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white rounded-lg visible opacity-100 duration-[500ms]`
             }
           >
             {col.num !== 0 && col.num}
