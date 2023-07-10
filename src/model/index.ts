@@ -44,16 +44,27 @@ export class GameBoard {
     );
   }
 
-  updateBoard(preCol: number): void {
+  updateBoard(preRow: number, preCol: number): void {
     const cloneBoard = structuredClone(this.board);
 
-    console.log(preCol);
+    console.log(preRow, preCol);
     cloneBoard[this.currentRow][this.currentCol] = blockList1[this.currentBlockIndex];
 
     if (this.currentRow - 1 >= 0) {
       if (preCol !== this.currentCol) {
-        for (let row = this.currentRow - 1; row >= 0; row--) {
-          cloneBoard[row][preCol] = EMPTY_BLOCK;
+        let row = Config.board.size.col - 2;
+        console.log(row);
+        while (row >= 0) {
+          if (cloneBoard[row][preCol].num === 0) {
+            for (let i = row - 1; i >= 0; i--) {
+              cloneBoard[i][preCol] = EMPTY_BLOCK;
+              row--;
+              console.log(row);
+            }
+            break;
+          } else {
+            row--;
+          }
         }
         console.log(this.currentRow - 1, this.currentCol);
       }
@@ -88,9 +99,11 @@ export class GameBoard {
 
   fillHole(row: number, col: number, rowOfCap: number): void {
     const capBlock = structuredClone(this.board[rowOfCap][col]);
+    const cloneBoard = structuredClone(this.board);
 
-    this.board[row][col] = capBlock;
-    this.board[rowOfCap][col] = EMPTY_BLOCK;
+    cloneBoard[row][col] = capBlock;
+    cloneBoard[rowOfCap][col] = EMPTY_BLOCK;
+    this.board = cloneBoard;
   }
 
   calculateIndex(num: number): number {
@@ -106,57 +119,63 @@ export class GameBoard {
 
   mergeBlocks(row: number, col: number, mergedRow: number, mergedCol: number): void {
     const mergedNumber = this.board[row][col].num * 2;
-    const newBlock = blockList8[this.calculateIndex(mergedNumber)];
+    const newBlock = structuredClone(blockList8[this.calculateIndex(mergedNumber)]);
+    const cloneBoard = structuredClone(this.board);
 
-    this.board[mergedRow][mergedCol] = EMPTY_BLOCK;
+    cloneBoard[mergedRow][mergedCol] = EMPTY_BLOCK;
     newBlock.isMerged = true;
-    this.board[row][col] = newBlock;
+    cloneBoard[row][col] = newBlock;
+    this.board = cloneBoard;
 
     console.log('Merge!');
   }
 
   doubleMerge(mergedBlocks: string, row: number, col: number): number {
     const mergedNumber = this.board[row][col].num * 4;
-    const newBlock = blockList8[this.calculateIndex(mergedNumber)];
+    const newBlock = structuredClone(blockList8[this.calculateIndex(mergedNumber)]);
+    const cloneBoard = structuredClone(this.board);
 
     switch (mergedBlocks) {
       case 'RIGHT_BOTTOM':
-        this.board[row][col + 1] = EMPTY_BLOCK;
-        this.board[row][col] = EMPTY_BLOCK;
+        cloneBoard[row][col + 1] = EMPTY_BLOCK;
+        cloneBoard[row][col] = EMPTY_BLOCK;
         newBlock.isMerged = true;
-        this.board[row + 1][col] = newBlock;
+        cloneBoard[row + 1][col] = newBlock;
         row++;
         break;
       case 'LEFT_BOTTOM':
-        this.board[row][col - 1] = EMPTY_BLOCK;
-        this.board[row][col] = EMPTY_BLOCK;
+        cloneBoard[row][col - 1] = EMPTY_BLOCK;
+        cloneBoard[row][col] = EMPTY_BLOCK;
         newBlock.isMerged = true;
-        this.board[row + 1][col] = newBlock;
+        cloneBoard[row + 1][col] = newBlock;
         row++;
         break;
       default:
-        this.board[row][col - 1] = EMPTY_BLOCK;
-        this.board[row][col + 1] = EMPTY_BLOCK;
+        cloneBoard[row][col - 1] = EMPTY_BLOCK;
+        cloneBoard[row][col + 1] = EMPTY_BLOCK;
         newBlock.isMerged = true;
-        this.board[row][col] = newBlock;
+        cloneBoard[row][col] = newBlock;
         break;
     }
     console.log('Double Merge!');
+    this.board = cloneBoard;
 
     return row;
   }
 
   tripleMerge(row: number, col: number): number {
     const mergedNumber = this.board[row][col].num * 8;
-    const newBlock = blockList8[this.calculateIndex(mergedNumber)];
+    const newBlock = structuredClone(blockList8[this.calculateIndex(mergedNumber)]);
+    const cloneBoard = structuredClone(this.board);
 
-    this.board[row][col - 1] = EMPTY_BLOCK;
-    this.board[row][col + 1] = EMPTY_BLOCK;
-    this.board[row][col] = EMPTY_BLOCK;
+    cloneBoard[row][col - 1] = EMPTY_BLOCK;
+    cloneBoard[row][col + 1] = EMPTY_BLOCK;
+    cloneBoard[row][col] = EMPTY_BLOCK;
     newBlock.isMerged = true;
-    this.board[row + 1][col] = newBlock;
+    cloneBoard[row + 1][col] = newBlock;
     row++;
     console.log('Triple Merge!');
+    this.board = cloneBoard;
 
     return row;
   }
