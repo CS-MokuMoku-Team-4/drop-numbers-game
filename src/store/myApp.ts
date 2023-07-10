@@ -7,7 +7,8 @@ const initialMyAppState = {
   nextBlockArea: initialNextBlocks,
   currentBlock: {
     num: 2,
-    color: 'bg-red-600',
+    fromColor: 'from-red-500',
+    toColor: 'to-red-700',
     topColor: 'border-t-red-300',
     leftColor: 'border-l-red-300',
     borderColor: 'border-red-800',
@@ -17,7 +18,8 @@ const initialMyAppState = {
   },
   nextBlock: {
     num: 4,
-    color: 'bg-orange-600',
+    fromColor: 'from-orange-500',
+    toColor: 'to-orange-700',
     topColor: 'border-t-orange-300',
     leftColor: 'border-l-orange-300',
     borderColor: 'border-orange-800',
