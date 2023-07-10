@@ -6,7 +6,7 @@ import { Config } from '@/config';
 import { EMPTY_BLOCK, blockList1 } from '@/consts/blocks';
 import { GameBoard } from '@/model';
 import Board from '@/components/Board';
-import { myAppActions } from './store/myApp';
+import { myAppActions } from '../store/myApp';
 import styles from '../styles/Home.module.scss';
 
 const DropNumbersGame = () => {
