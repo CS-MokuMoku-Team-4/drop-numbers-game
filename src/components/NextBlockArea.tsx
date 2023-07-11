@@ -13,7 +13,7 @@ const NextBlockArea = () => {
             key={colIndex}
             className={
               col.num === 0
-                ? `${styles.cell} bg-slate-800`
+                ? `${styles.cell} bg-slate-800 border-slate-800 border-4 invisible opacity-0 duration-[500ms]`
                 : `${styles.next_block} ${col.fromColor} ${col.toColor} ${col.textSizeSmall} ${col.topColor} ${col.leftColor} ${col.borderColor} border-4 flex justify-center items-center text-white rounded-lg bg-gradient-to-b visible opacity-100 duration-[500ms]`
             }
           >

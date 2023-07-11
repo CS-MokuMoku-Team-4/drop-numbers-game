@@ -90,12 +90,6 @@
 }
 
 /* Block */
-.block {
-  width: 80px;
-  height: 80px;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5), 7px 7px 20px 0px rgba(0, 0, 0, 0.1),
-    4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-}
 
 .next_block {
   width: 4rem;
@@ -104,7 +98,7 @@
 
 /* ブロックのアニメーション */
 .merge_block {
-  animation: merge 0.5s ease;
+  animation: merge 0.5s ease-out;
 }
 
 @keyframes merge {
@@ -114,7 +108,7 @@
   }
   50% {
     opacity: 0;
-    transform: scale(50%);
+    transform: scale(80%);
   }
   100% {
     opacity: 1;

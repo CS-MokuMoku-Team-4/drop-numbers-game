@@ -60,7 +60,7 @@ const Board = () => {
   return (
     <div className={`${styles.metallic} mb-10 p-5`}>
       <NextBlockArea />
-      <div className='bg-black border-4 border-slate-800 border-b-slate-700 border-r-slate-700'>
+      <div className='bg-slate-900 border-4 border-slate-800 border-b-slate-700 border-r-slate-700'>
         {board.map((row, rowIndex) => {
           return (
             <div key={rowIndex} className='flex justify-center items-center'>
@@ -68,21 +68,28 @@ const Board = () => {
                 return (
                   <div
                     key={colIndex}
-                    onClick={() => {
-                      handleClick(colIndex);
-                    }}
-                    className={classNames(
-                      col.num === 0
-                        ? colIndex % 2 === 0
-                          ? `bg-black border-black`
-                          : `bg-slate-900 border-slate-900`
-                        : col.isMerged
-                        ? `${styles.merge_block} ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`
-                        : ` ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`,
-                      `${styles.cell} border-4 flex justify-center items-center`,
-                    )}
+                    className={
+                      colIndex % 2 === 0 ? `bg-black border-black` : `bg-slate-900 border-slate-900`
+                    }
                   >
-                    {col.num !== 0 && col.num}
+                    <div
+                      key={colIndex}
+                      onClick={() => {
+                        handleClick(colIndex);
+                      }}
+                      className={classNames(
+                        col.num === 0
+                          ? colIndex % 2 === 0
+                            ? `bg-black border-black`
+                            : `bg-slate-900 border-slate-900`
+                          : col.isMerged
+                          ? `${styles.merge_block} ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`
+                          : ` ${col.fromColor} ${col.toColor} ${col.textSize} ${col.topColor} ${col.leftColor} ${col.borderColor} text-white rounded-lg bg-gradient-to-b`,
+                        `${styles.cell} border-4 flex justify-center items-center`,
+                      )}
+                    >
+                      {col.num !== 0 && col.num}
+                    </div>
                   </div>
                 );
               })}
