@@ -9,6 +9,7 @@ export type MyAppState = {
     isMoving: boolean;
     isMoved: boolean;
     isMerged: boolean;
+    showGameOverWindow: boolean;
   };
 };
 
