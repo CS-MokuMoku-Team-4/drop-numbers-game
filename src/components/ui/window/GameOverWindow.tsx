@@ -1,17 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { myAppActions } from '@/store/myApp';
 import GameOverSVG from '@/components/svgFiles/GameOverSVG';
-import ReturnTopButton from '@/components/ui/buttons/ReturnTopButton';
+import ReturnToTopButton from '@/components/ui/buttons/ReturnToTopButton';
 import styles from '../../../styles/Home.module.scss';
 
 const GameOverWindow = () => {
-  const dispatch = useDispatch();
-
-  const startNewGame = () => {
-    dispatch(myAppActions.setShowGameOverWindow(false));
-  };
-
   return (
     <div className={styles.modal} style={{ width: '400px', height: '200px' }}>
       <div
@@ -21,7 +13,7 @@ const GameOverWindow = () => {
           <GameOverSVG />
         </div>
         <div className='flex justify-center items-center text-center w-full h-full mb-5'>
-          <ReturnTopButton onClick={startNewGame} />
+          <ReturnToTopButton />
         </div>
       </div>
     </div>

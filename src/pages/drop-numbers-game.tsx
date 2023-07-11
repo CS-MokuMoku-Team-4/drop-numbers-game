@@ -1,6 +1,5 @@
 import type { MyAppState } from '@/types';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Config } from '@/config';
@@ -22,7 +21,6 @@ const DropNumbersGame = () => {
   const currentColumn = useSelector((state: MyAppState) => state.myApp.currentColumn);
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
-  const isMerged = useSelector((state: MyAppState) => state.myApp.isMerged);
   const showGameOverWindow = useSelector((state: MyAppState) => state.myApp.showGameOverWindow);
   const colIndex = useRef(currentColumn);
   const preRowIndex = useRef(currentRow);
@@ -173,7 +171,6 @@ const DropNumbersGame = () => {
           dispatch(myAppActions.setIsMoving(false));
           dispatch(myAppActions.setIsMoved(false));
           isMovedRef.current = false;
-          dispatch(myAppActions.setIsMerged(false));
           dropBlock(); // 次のブロック
         }, NORMAL_SPEED);
       } else {
@@ -229,9 +226,7 @@ const DropNumbersGame = () => {
       gameBoard.currentCol = currentColumn;
       isMovedRef.current = true;
     }
-
-    console.log(isMerged);
-  }, [gameStart, currentColumn, colIndex, isMoving, isMoved, isMerged, gameBoard, currentRow]);
+  }, [gameStart, currentColumn, colIndex, isMoving, isMoved, gameBoard, currentRow]);
 
   // キー入力
   // const handleKeyDown = useCallback((event: { keyCode: number }) => {
@@ -270,11 +265,9 @@ const DropNumbersGame = () => {
         <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen flex flex-col justify-center items-center'>
           <Board />
         </div>
-        {showGameOverWindow && (
+        {Boolean(showGameOverWindow) && (
           <div className={styles.overlay}>
-            <Link href={'/'}>
-              <GameOverWindow />
-            </Link>
+            <GameOverWindow />
           </div>
         )}
       </div>
