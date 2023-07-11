@@ -32,6 +32,7 @@ const initialMyAppState = {
   isMoving: false,
   isMoved: false,
   isMerged: false,
+  showGameOverWindow: false,
 };
 
 const myAppSlice = createSlice({
@@ -77,6 +78,12 @@ const myAppSlice = createSlice({
     },
     setIsMerged: (state: { isMerged: boolean }, action: { payload: boolean }) => {
       state.isMerged = action.payload;
+    },
+    setShowGameOverWindow: (
+      state: { showGameOverWindow: boolean },
+      action: { payload: boolean },
+    ) => {
+      state.showGameOverWindow = action.payload;
     },
   },
 });

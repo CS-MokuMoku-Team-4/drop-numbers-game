@@ -1,11 +1,13 @@
 import type { MyAppState } from '@/types';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Config } from '@/config';
 import { EMPTY_BLOCK, blockList1 } from '@/consts/blocks';
 import { GameBoard } from '@/model';
 import Board from '@/components/Board';
+import GameOverWindow from '@/components/ui/window/GameOverWindow';
 import { myAppActions } from '../store/myApp';
 import styles from '../styles/Home.module.scss';
 
@@ -21,6 +23,7 @@ const DropNumbersGame = () => {
   const isMoving = useSelector((state: MyAppState) => state.myApp.isMoving);
   const isMoved = useSelector((state: MyAppState) => state.myApp.isMoved);
   const isMerged = useSelector((state: MyAppState) => state.myApp.isMerged);
+  const showGameOverWindow = useSelector((state: MyAppState) => state.myApp.showGameOverWindow);
   const colIndex = useRef(currentColumn);
   const preRowIndex = useRef(currentRow);
   const preColIndex = useRef(currentColumn);
@@ -186,7 +189,7 @@ const DropNumbersGame = () => {
         );
       }
     } else {
-      console.log('Game Over!!');
+      dispatch(myAppActions.setShowGameOverWindow(true));
     }
   }, [dispatch, gameBoard, numberCheck, prepareNextBlock]);
 
@@ -267,6 +270,13 @@ const DropNumbersGame = () => {
         <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen flex flex-col justify-center items-center'>
           <Board />
         </div>
+        {showGameOverWindow && (
+          <div className={styles.overlay}>
+            <Link href={'/'}>
+              <GameOverWindow />
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
