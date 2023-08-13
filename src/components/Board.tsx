@@ -23,7 +23,6 @@ const Board = () => {
       currentRowRef.current = currentRow;
       currentColRef.current = currentColumn;
       let tempCol = currentColRef.current;
-      let resultCol = colIndex;
 
       dispatch(myAppActions.setIsMoving(true));
 
@@ -32,9 +31,9 @@ const Board = () => {
           // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRowRef.current][tempCol + 1].num === 0) {
             tempCol++;
+            dispatch(myAppActions.setCurrentColumn(colIndex));
           } else {
             // 障害物があれば移動しない
-            resultCol = currentColRef.current;
             break;
           }
         }
@@ -43,15 +42,14 @@ const Board = () => {
           // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRowRef.current][tempCol - 1].num === 0) {
             tempCol--;
+            dispatch(myAppActions.setCurrentColumn(colIndex));
           } else {
             // 障害物があれば移動しない
-            resultCol = currentColRef.current;
             break;
           }
         }
       }
 
-      dispatch(myAppActions.setCurrentColumn(resultCol));
       dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
     }
