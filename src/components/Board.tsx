@@ -20,7 +20,7 @@ const Board = () => {
 
   const handleClick = (colIndex: number) => {
     if (!isMoving && !isMoved) {
-      currentRowRef.current = currentRow;
+      currentRowRef.current = currentRow + 1;
       currentColRef.current = currentColumn;
       let tempCol = currentColRef.current;
 
