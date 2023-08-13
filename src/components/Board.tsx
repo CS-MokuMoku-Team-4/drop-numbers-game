@@ -31,25 +31,24 @@ const Board = () => {
           // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRowRef.current][tempCol + 1].num === 0) {
             tempCol++;
-            dispatch(myAppActions.setCurrentColumn(colIndex));
           } else {
             // 障害物があれば移動しない
             break;
           }
+          dispatch(myAppActions.setCurrentColumn(colIndex));
         }
       } else if (colIndex < currentColRef.current) {
         while (tempCol - 1 >= colIndex) {
           // クリックした列と現在地の間に障害物がないかどうか調べる
           if (board[currentRowRef.current][tempCol - 1].num === 0) {
             tempCol--;
-            dispatch(myAppActions.setCurrentColumn(colIndex));
           } else {
             // 障害物があれば移動しない
             break;
           }
+          dispatch(myAppActions.setCurrentColumn(colIndex));
         }
       }
-
       dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
     }
