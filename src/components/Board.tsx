@@ -20,10 +20,10 @@ const Board = () => {
 
   const handleClick = (colIndex: number) => {
     if (!isMoving && !isMoved) {
-      currentRowRef.current = currentRow;
+      currentRowRef.current = currentRow + 1;
       currentColRef.current = currentColumn;
       let tempCol = currentColRef.current;
-      let resultCol = colIndex;
+      let canMove = false; // ブロックをクリックした列に移動できるかどうか
 
       dispatch(myAppActions.setIsMoving(true));
 
@@ -34,9 +34,9 @@ const Board = () => {
             tempCol++;
           } else {
             // 障害物があれば移動しない
-            resultCol = currentColRef.current;
             break;
           }
+          canMove = true;
         }
       } else if (colIndex < currentColRef.current) {
         while (tempCol - 1 >= colIndex) {
@@ -45,13 +45,16 @@ const Board = () => {
             tempCol--;
           } else {
             // 障害物があれば移動しない
-            resultCol = currentColRef.current;
             break;
           }
+          canMove = true;
         }
       }
 
-      dispatch(myAppActions.setCurrentColumn(resultCol));
+      if (canMove) {
+        dispatch(myAppActions.setCurrentColumn(colIndex));
+      }
+
       dispatch(myAppActions.setIsMoved(true));
       dispatch(myAppActions.setIsMoving(false));
     }
