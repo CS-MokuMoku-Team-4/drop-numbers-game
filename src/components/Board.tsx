@@ -61,7 +61,7 @@ const Board = () => {
   };
 
   return (
-    <div className={`${styles.metallic} mb-10 p-5`}>
+    <div className={`${styles.metallic} p-5`}>
       <NextBlockArea />
       <div className='bg-slate-900 border-4 border-slate-800 border-b-slate-700 border-r-slate-700'>
         {board.map((row, rowIndex) => {
