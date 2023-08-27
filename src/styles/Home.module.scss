@@ -53,7 +53,7 @@
   box-shadow: 5px 5px 10px #e0deff inset, -5px -5px 10px #4842fb inset;
 }
 
-@mixin orenge_btn {
+@mixin orange_btn {
   @include buttons();
   background: linear-gradient(#845400, #ffa600);
   border: 2px solid #ffb22285;
