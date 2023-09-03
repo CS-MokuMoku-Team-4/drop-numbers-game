@@ -12,13 +12,10 @@
   "dependencies": {
     "@next/font": "^13.4.7",
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/node": "20.3.2",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "sass": "^1.63.6"
   },
@@ -26,6 +23,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
+    "@types/node": "20.5.9",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "autoprefixer": "^10.4.14",
@@ -43,6 +43,6 @@
     "prettier": "2.8.8",
     "tailwindcss": "^3.3.2",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   }
 }
