@@ -8,7 +8,6 @@ WORKDIR /app
 COPY --link package.json ./
 RUN npm install
 RUN npm install -g next
-RUN npm install use-sound
 # RUN npx next -v
 
 # Rebuild the source code only when needed
