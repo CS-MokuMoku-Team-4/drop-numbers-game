@@ -2,10 +2,12 @@ import type { MyAppState } from '@/types';
 import Head from 'next/head';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useSound from 'use-sound';
 import { Config } from '@/config';
 import { EMPTY_BLOCK, blockList1 } from '@/consts/blocks';
 import { GameBoard } from '@/model';
 import Board from '@/components/Board';
+import AreYouReadyWindow from '@/components/ui/window/AreYouReadyWindow';
 import GameOverWindow from '@/components/ui/window/GameOverWindow';
 import { myAppActions } from '../store/myApp';
 import styles from '../styles/Home.module.scss';
@@ -14,6 +16,13 @@ const DropNumbersGame = () => {
   const HIGH_SPEED = 5;
   const NORMAL_SPEED = 1000;
   const SLOW_SPEED = 2000;
+
+  // BGM
+  const bgm1 = '/assets/sounds/maou_bgm_cyber13.mp3';
+  const [playBGM1, { stop }] = useSound(bgm1, {
+    loop: true,
+  });
+
   const dispatch = useDispatch();
   const currentBlock = useSelector((state: MyAppState) => state.myApp.currentBlock);
   const nextBlockArea = useSelector((state: MyAppState) => state.myApp.nextBlockArea);
@@ -202,16 +211,13 @@ const DropNumbersGame = () => {
   }, [dispatch, dropBlock, gameBoard, prepareNextBlock]);
 
   const gameStart = useCallback(() => {
+    startRef.current = false;
     console.log('Start!!');
+    playBGM1();
     dropNextBlock();
-  }, [dropNextBlock]);
+  }, [dropNextBlock, playBGM1]);
 
   useEffect(() => {
-    if (startRef.current) {
-      startRef.current = false;
-      gameStart();
-    }
-
     if (!isMoving) {
       preRowIndex.current = currentRow;
       colIndex.current = currentColumn;
@@ -265,9 +271,14 @@ const DropNumbersGame = () => {
         <div className='bg-gradient-to-b from-cyan-800 to-black w-screen h-screen flex flex-col justify-center items-center'>
           <Board />
         </div>
+        {Boolean(startRef.current) && (
+          <div className={styles.overlay}>
+            <AreYouReadyWindow onClick={gameStart} />
+          </div>
+        )}
         {Boolean(showGameOverWindow) && (
           <div className={styles.overlay}>
-            <GameOverWindow />
+            <GameOverWindow onClick={() => stop()} />
           </div>
         )}
       </div>
