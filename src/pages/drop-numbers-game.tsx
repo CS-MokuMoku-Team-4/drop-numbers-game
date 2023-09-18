@@ -114,9 +114,10 @@ const DropNumbersGame = () => {
           dispatch(myAppActions.setBoard(gameBoard.board));
         }, 500);
         // 空洞が無くなるまで埋める
-        for (let colIndex = col - 1; colIndex <= col + 1; colIndex++) {
+        for (let colIndex = col - 1; colIndex <= col + 1; ) {
           if (colIndex < 0) {
             colIndex++;
+            continue;
           }
 
           if (colIndex >= Config.board.size.row) {
@@ -135,7 +136,10 @@ const DropNumbersGame = () => {
             }
             tempRow--;
           }
+
+          colIndex++;
         }
+
         numberCheck(rowIndex, col);
         dispatch(myAppActions.setBoard(gameBoard.board));
       }
