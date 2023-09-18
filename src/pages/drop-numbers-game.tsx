@@ -1,6 +1,6 @@
 import type { MyAppState } from '@/types';
 import Head from 'next/head';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useSound from 'use-sound';
 import { Config } from '@/config';
