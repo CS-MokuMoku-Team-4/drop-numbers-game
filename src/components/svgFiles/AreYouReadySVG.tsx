@@ -1,6 +1,6 @@
 import styles from '../../styles/Home.module.scss';
 
-const TitleSVG = () => {
+const AreYouReadySVG = () => {
   return (
     <div className={`${styles.shadow_container} flex-row`}>
       <svg
@@ -55,4 +55,4 @@ const TitleSVG = () => {
   );
 };
 
-export default TitleSVG;
+export default AreYouReadySVG;
