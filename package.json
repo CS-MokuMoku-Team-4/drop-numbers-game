@@ -10,7 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@next/font": "^13.4.7",
     "@reduxjs/toolkit": "^1.9.5",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
